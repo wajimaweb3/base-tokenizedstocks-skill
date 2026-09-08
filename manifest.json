@@ -1,0 +1,165 @@
+{
+ "name": "base-tokenizedstocks-docs",
+ "version": "1.0.0",
+ "what_this_is": "An address book of primary documentation for tokenized equity on Base. It is not the skill itself — SKILL.md holds the frameworks; this file tells the agent which official docs exist, which URL to open, and which analysis each source serves. Do not ingest the whole list into context: identify the issuer or data need under analysis, then fetch only the matching rows. Liveness verified 2026-09-06. Re-verify any row on first use in a session.",
+ "how_to_use": [
+  "Identify what the question needs: issuer terms (Dinari, Coinbase, Backed), the token standard (B20), or market data (price, dividends).",
+  "Select rows whose category and skill_use match that need. Cap at 3 to 4 fetches per answer.",
+  "Dinari docs serve raw markdown: append .md to any page URL for a fetch-friendly version, and docs.dinari.com/llms.txt indexes the full site.",
+  "Treat issuer docs as claims until cross-checked: a promised dividend pass-through is terms-only evidence until a live event has exercised it.",
+  "Issuer status is a first-class fact. Dinari actively issues (714 dShares); Coinbase actively issues B20 stocks (13 tickers, ex-US); Backed is redemption-only. An answer that treats them interchangeably is wrong.",
+  "The skill's subject is Base exclusively. Off-Base rows (xstocks, ondo-stocks) exist for mechanism comparison and print evidence about the class — never as an analysis subject, venue, or recommendation.",
+  "When analyzing a specific token, always pair the issuer row with the B20 standard row — eligibility enforcement lives in the standard's policy scopes, not in the issuer's marketing."
+ ],
+ "priority_legend": {
+  "must": "Fetch whenever the analysis touches this issuer or primitive. Answers are wrong without it.",
+  "core": "Fetch when that name or its product is under review.",
+  "should": "Add when the question expands beyond the core loop.",
+  "thin": "Weak or gated public docs. Use as a pointer, not as a source of truth."
+ },
+ "sources": [
+  {
+   "id": "dinari-dshares",
+   "name": "Dinari dShares",
+   "category": "issuer",
+   "priority": "must",
+   "status": "active",
+   "docs": "https://docs.dinari.com",
+   "pages": [
+    "https://docs.dinari.com/docs/what-is-dshare.md",
+    "https://docs.dinari.com/docs/dividend-payments.md",
+    "https://docs.dinari.com/docs/corporate-action-processing.md",
+    "https://docs.dinari.com/docs/regional-requirements.md",
+    "https://docs.dinari.com/docs/restrictions.md",
+    "https://docs.dinari.com/docs/us.md",
+    "https://docs.dinari.com/docs/blockchain.md",
+    "https://docs.dinari.com/docs/245-tradable-assets.md",
+    "https://docs.dinari.com/docs/stock-split-handling.md",
+    "https://docs.dinari.com/docs/mergers.md",
+    "https://docs.dinari.com/docs/ticker-changes.md",
+    "https://docs.dinari.com/docs/24-7-trading.md",
+    "https://docs.dinari.com/docs/hyperliquid.md",
+    "https://docs.dinari.com/docs/usdplus-evm.md"
+   ],
+   "skill_use": "Primary active issuer for the claim stack: what a dShare legally is, how dividends reach holders, how splits/ticker changes/mergers are processed, who may hold per jurisdiction, and which chains carry the tokens (Base confirmed, eip155:8453). 714 dShares listed as of 2026-09-06. Dedicated pages define the split rebase mechanics (halt-rebase-verify-resume, paused while IN_PROGRESS, fractions liquidated to USD+) and merger outcomes per consideration type (manual triage, no endpoint — a disappearing position is the signal). Custody, brokerage, and compliance are handled by Dinari under the hood. The Base dividend pipe is staged, not exercised: the DividendDistribution contract on Base (0x7978c49C4861e43692702FD74b12B620eE47601e) has executed five transactions lifetime — deployment, a role grant, a 2025-09-18 test createDistribution (0.78 USD+) of which 0.77 paid to a Dinari-affiliated wallet holding nearly all that test token's supply, and a 2026-02-04 reclaim — and Dinari's deployment registry tags the Base entry staging (production distributions: Plume). Docs drift: two USD+ contracts exist on Base and usdplus-evm.md lists the one the distribution contract has never paid from. Verified 2026-09-07 via tx records and Basescan."
+  },
+  {
+   "id": "backed-btokens",
+   "name": "Backed bTokens",
+   "category": "issuer",
+   "priority": "core",
+   "status": "legacy",
+   "docs": "https://assets.backed.fi/products",
+   "pages": [
+    "https://assets.backed.fi/products/bnvda",
+    "https://assets.backed.fi/legal-documentation"
+   ],
+   "skill_use": "A retired product line, not a dead issuer: Backed was acquired by Kraken (announced 2025-12-02) and went all-in on xStocks in March 2026 (Solana — off-Base); the 17 bTokens (bNVDA CH1173294336, bTSLA, bCOIN, bMSFT, and bond/ETF trackers) remain redeemable for existing holders but closed to new issuance as of 2026-09-06. Use for claim-stack comparisons against an active issuer, as the candidate pool for underlying-level corporate-action prints, and as the class's only issuer-level print to date — an acquisition-pivot that closed issuance while leaving redemption open. Each product page carries an ISIN — the traceable legal identifier of the underlying wrapper."
+  },
+  {
+   "id": "xstocks",
+   "name": "xStocks (Backed × Kraken)",
+   "category": "issuer",
+   "priority": "core",
+   "status": "active-off-base",
+   "docs": "https://docs.xstocks.fi/docs",
+   "pages": [
+    "https://docs.xstocks.fi/developers/multipliers.md",
+    "https://docs.xstocks.fi/docs/dividends-and-stock-splits.md",
+    "https://docs.xstocks.fi/apis/openapi.md"
+   ],
+   "skill_use": "Backed's active product line post-pivot (March 2026): tokenized equities on Solana and EVM chains, distributed with Kraken. Corporate actions run through an onchain multiplier that accumulates over the token's life: dividends are reinvested rather than distributed ('net of applicable withholding taxes'), splits scale the multiplier up, reverse splits scale it down, activation lands 00:30 UTC the day after the ex-date (observed 23:55–04:00), and holders never act. Chain implementations differ — EVM contracts rebase balances directly; on Solana and TON the onchain balance stays constant with the multiplier in token metadata, so a balance-history check shows nothing there. Print VERIFIED 2026-09-07, the class's first for an underlying-level dividend: the issuer API's dated activation log cross-checked onchain to full precision — AAPLx moved 1.0 → 1.0033 through five quarterly dividend activations (2025-08-14 to 2026-08-08, Solana and the identically-valued Ethereum contract), SPYx 1.0 → 1.0057 through four (2025-10-31 to 2026-06-18); the contract's event counter equals the log length. Per-issuer evidence: this proves xStocks' reinvestment pipe and nothing about Dinari's USD+ distribution on Base. Reads: api.xstocks.fi/api/v2/public/assets/{SYMBOL}/multiplier[/history]?network={NETWORK} (keyless; the multiplier-history route in api-routes.json), EVM eth_call getCurrentMultiplier() (multiplier as 1e18 mantissa; one contract address reused across all EVM deployments; no Base deployment exists), Solana metadata extension on Solscan. Off-Base: mechanism comparison and print evidence only, never a Base example. Docs pulled via curl with a browser user-agent on 2026-09-07 (plain automated fetch gets 403)."
+  },
+  {
+   "id": "b20-standard",
+   "name": "B20 Token Standard (Base)",
+   "category": "standard",
+   "priority": "must",
+   "status": "active",
+   "docs": "https://docs.base.org/specifications/b20/specification-overview",
+   "pages": [
+    "https://docs.base.org/base-chain/asset-issuance/tokenized-stocks-on-base",
+    "https://docs.base.org/specifications/b20/specification-overview"
+   ],
+   "skill_use": "The token standard tokenized equity deploys through on Base — and it carries the dividend mechanism itself, not just plumbing: corporate actions and dividends adjust a single multiplier ('cash dividends are converted to shares of the underlying equity and reflected via a multiplier update... rather than distributed as cash'), so one B20 token does not permanently equal one share, and every conversion between tokens and shares applies the current multiplier. Onchain reads: multiplier() (WAD 1e18), scaledBalanceOf(address), toScaledBalance/toRawBalance; history in MultiplierUpdated events, scheduled changes via updateUIMultiplier with advance onchain notice. Policy scopes (allowlist/blocklist transfer control), pausing, seizure, and supply caps remain the eligibility-enforcement layer at the contract. Verified 2026-09-07: all 13 live B20 tokens read multiplier exactly 1.0 — the mechanism is terms-only, never exercised."
+  },
+  {
+   "id": "coinbase-stocks",
+   "name": "Coinbase Tokenized Stocks (B20)",
+   "category": "issuer",
+   "priority": "must",
+   "status": "active",
+   "docs": "https://base.org/stocks",
+   "pages": [
+    "https://base.org/stocks",
+    "https://docs.base.org/base-chain/asset-issuance/tokenized-stocks-on-base",
+    "https://blog.base.dev/b20-tokenized-stocks-on-base",
+    "https://blog.base.org/tokenized-stocks"
+   ],
+   "skill_use": "The second live issuer on Base (verified 2026-09-07): Coinbase-issued B20 tokenized stocks, 'backed 1:1 by shares held in regulated custody' — each token 'a beneficial claim on a real share, held in regulated, bankruptcy-remote custody separate from Coinbase'. The issuing entity is Coinbase Onchain SPV Ltd, with ADGM prospectus documents linked per token on base.org/stocks (read 2026-09-08). 13 live tokens (NVDAc, METAc, AAPLc, GOOGLc, AMZNc, MSFTc, MSTRc, SNDKc, SPCXc, TSLAc, COINc, CRCLc, INTCc), registry and full addresses in the docs page (onchain registry 0x3f3E8cf41cdd3b1D118c16471aB0113DfDDd5CaD). Eligible jurisdictions outside the US only; mint/redeem restricted to KYC'd Authorized Participants, secondary trading permissionless. Dividends and splits run through the B20 multiplier (b20-standard row) — the issuer's own stocks page asks 'How are dividends and splits handled?' and publishes no answer, and all 13 multipliers read exactly 1.0 on 2026-09-07: terms-only. The page's partner list (Aave, Morpho, Euler, Beefy, Glider, Virtuals, and more) is a tagline surface — verify a named venue and contract before treating any entry as live (Beefy vaults verified live; a same-day Morpho spot-check found no live stock market). The 2026-08-24 launch announcement names the custody chain: Authorized Participants buy the shares, which go to Alpaca, a regulated broker and custodian, in a bankruptcy-remote structure supervised by Abu Dhabi Global Market (ADGM) regulators; once minted the tokens are standard B20 — 'no whitelisted wallets and no platform lock-in'. Only 4 of the 13 tokens trade in live pools against USDC (NVDAc, GOOGLc, AAPLc, METAc per docs.basestonk.io/stock-pairs.md, 2026-09-08); the other 9 (incl. TSLAc, COINc, CRCLc, INTCc, MSFTc, MSTRc, AMZNc, SNDKc, SPCXc) have no onchain market yet — an empty pool enumeration for those 9 is a finding about where the market lives, not an absence of product."
+  },
+  {
+   "id": "coinbase-b20-events",
+   "name": "Coinbase B20 Events (SQL API)",
+   "category": "data",
+   "priority": "should",
+   "status": "active",
+   "docs": "https://docs.cdp.coinbase.com/data/sql-api/b20-events",
+   "skill_use": "Onchain event queries for B20 tokens on Base (mints, transfers, policy actions). Candidate source for custody-chain verification and verified-print evidence when a corporate action exercises onchain. Auth requirements need checking per session; treat as keyed until confirmed keyless."
+  },
+  {
+   "id": "ondo-stocks",
+   "name": "Ondo Stocks",
+   "category": "issuer",
+   "priority": "thin",
+   "status": "not-on-base",
+   "docs": "https://docs.ondo.finance/ondo-stocks/technical",
+   "skill_use": "Parked for v0.1: active issuer (440+ tokenized securities, not available in the US) but not deployed on Base per its own technical docs as of 2026-09-06. Re-check if the user's question is issuer-agnostic rather than Base-specific; do not use as a Base example."
+  },
+  {
+   "id": "base-b20-ecosystem",
+   "name": "Base B20 Ecosystem Announcement",
+   "category": "ecosystem",
+   "priority": "should",
+   "status": "active",
+   "docs": "https://blog.base.org/tokenized-stocks",
+   "pages": [
+    "https://blog.base.org/tokenized-stocks"
+   ],
+   "skill_use": "Base's official B20 launch announcement ('Stocks just got updated.', published 2026-08-24) and the closest thing to an official ecosystem directory: it names every third-party protocol that 'publicly announced support for the B20 standard' (list transcribed from the article's ecosystem graphic, 2026-09-07). DEX: Aerodrome. Trading venues: Signa, SOSOValue, Virtuals, Maestro, Definitive, Tribeca, Banana Gun, Wasabi, 01 Exchange, bankr, Flaunch, Treasure, True Markets. Aggregators: Li.Fi, 0x, CoW Swap, Beefy, 1inch, KyberSwap, Portals, Matcha, Jumper. Borrow/lend: Aave, Morpho, Euler. Portfolio: Reserve, Glider, ZyfAI, Enso. Wallets: Base App, Bitget Wallet, OKX Wallet, Fomo. Curators: Bitwise, Dialectic, Clearstar, Steakhouse, Tau Labs, Gauntlet. Neobanks: Superform, Avici, ample.money, Liminal Cash, defi.com. Fintech: Fusion, Grow, Zoth, Makina, Castar, Centrifuge. Oracle: Chainlink. TWO USES: (1) launchpad identity resolution for the meme/stock genre — the dex ids 'o1-launchpad' and 'bankr' in pool data correspond to 01 Exchange and bankr, both named here as trading venues; Flaunch is the other named launchpad. (2) The tagline-versus-venue sweep list: announced support is a claim, not a live market — verify venue and contract before treating any entry as real (Morpho named here, yet the 2026-09-07 spot-check found no live stock market; Beefy named and verified live). Direct fetch 403s (bot protection); read via a reader proxy or search cache. Names the custodian too (see coinbase-stocks row)."
+  },
+  {
+   "id": "base-launchpads",
+   "name": "Base Token Launchpads (o1, bankr, Flaunch)",
+   "category": "venue",
+   "priority": "should",
+   "status": "active",
+   "docs": "https://docs.o1.exchange",
+   "pages": [
+    "https://o1.exchange",
+    "https://docs.o1.exchange",
+    "https://bankr.bot",
+    "https://docs.bankr.bot",
+    "https://flaunch.gg",
+    "https://docs.flaunch.gg"
+   ],
+   "skill_use": "The launchpad layer for the meme/stock genre (meme-pair-launchpad.md, factory layer). Three venues, named in Base's official B20 ecosystem announcement (base-b20-ecosystem row) with homepages and docs verified reachable 2026-09-07: o1 — o1.exchange ('Trading Terminal on Base/Solana', docs 'Democratizing Alpha for Traders'); this is the dex id 'o1-launchpad' that dominates the meme/stock pools on Base. bankr — bankr.bot (AI-agent trading surface: buy/sell/swap, limit orders) plus docs. Flaunch — flaunch.gg ('Launch. Trade. Earn.'), docs live; named by Base but not yet seen in the genre's pool data. USE: when a pool's dex identifies its launchpad, resolve the venue here, then demand the launch mechanics from that venue's docs — hook permissions, fee control, liquidity locking — before any fairness claim; the docs' depth is itself a signal (a launchpad with no documented hook permissions is a hook you are trusting blind). Homepages verified reachable; deep mechanics pages not yet audited — re-verify on first use."
+  },
+  {
+   "id": "basestonk-launchpad",
+   "name": "BaseStonk Launchpad",
+   "category": "venue",
+   "priority": "should",
+   "status": "active",
+   "docs": "https://docs.basestonk.io",
+   "pages": [
+    "https://docs.basestonk.io/index.md",
+    "https://docs.basestonk.io/stock-pairs.md",
+    "https://docs.basestonk.io/integration/contracts.md",
+    "https://docs.basestonk.io/integration/api.md",
+    "https://basestonk.io"
+   ],
+   "skill_use": "A Base launchpad NOT named in Base's official B20 ecosystem announcement (found by the user, 2026-09-07) — proof the official list is non-exhaustive. One transaction creates a token, its Uniswap v4 pool and trading from block one: no bonding curve, no graduation, no migration; the launcher must end every launch holding nothing; no admin key over any pool; current generation V6 (AdvancedLauncherV6 + AdvancedFeeHookV6, source-verified addresses in the contracts page), with a separate B20 rail (AdvancedLauncherB20V6) for launches against native B20 tokens. Its Pairs page is the cleanest map of the stock-leg landscape on Base: three kinds — (1) native Coinbase B20 (per their docs only four tokens trade in live pools); (2) the ST0x wrapped family, eleven 1:1-backed equities/ETFs with real DEX liquidity (wtCOIN, wtNVDA, wtMSTR, wtSPCX + wtSGOV/wtSKHY/wtSPYM/wtDRAM/wtQQQM/wtIAU/wtCEG; wtCOIN verified onchain at 0x5cDa0E1CA4ce2af96315f7F8963C85399c172204, supply ~1,343) — a separate claim stack from the registry tokens, walk the wrapper's backing before treating it as the share; (3) Robinhood Chain's own 194 stocks (chain 4663 side; off-Base evidence). The same Pairs page (2026-09-08) documents the live-market state of Coinbase B20 tokens: only four of thirteen trade in live pools against USDC (NVDAc, GOOGLc, AAPLc, METAc) — the other nine have no onchain market yet, so ETH cannot route into them; an empty pool enumeration for those nine is a finding, not an absence of product. Chainlink equity feeds refuse beyond 96h staleness ('24h would fail every Saturday') — a venue admitting the two-clock problem the onchain-basis rubric is built on. wtNVDA (0xfb5b41acdba20a3230f84be995173cfb98b8d6e7, verified onchain 2026-09-08) is the NVIDIA leg of the ST0x family — Chainlink-priced, ~5 DEX books, ~$14k total reserve; a direct NVDAc/wtNVDA 0.05% pool on hydrex-integral (created 2026-08-26, $4.1k reserve) is a live market whose subject is the native-vs-wrapper spread. Keyless REST API at api.basestonk.io (per-launch hook, generation, pair, pressure). 'Dividend baskets' = trade-fee dividends paid in creator-picked assets, NOT equity dividends — the word collides with the corporate-action rubric's subject; keep the two claims separate. Also operates on Robinhood Chain (deployed 2026-09-04) — that side is evidence, never a venue."
+  }
+ ]
+}

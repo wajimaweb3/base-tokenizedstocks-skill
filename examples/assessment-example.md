@@ -1,0 +1,23 @@
+# Worked assessment: dNVDA — the output shape to imitate
+
+Every figure below is an illustrative print stamped to a teaching date. In real use, each one is re-pulled live this session (Stooq for the share, the dividend calendar, the issuer docs) before anything is delivered. The structure is the deliverable; the numbers are stage props. Never quote them as facts.
+
+Asset: dNVDA — a dShare issued by Dinari on Base (chain 8453). One line, first mention: what it is, who issues it, which claim layer it sits in.
+
+Claim stack walk: layer 1, the token in the wallet. Layer 2, a contractual claim against Dinari — not against NVIDIA, and not a shareholding. Layer 3, the real NVDA share held through Dinari's brokerage and custody arrangement. Layer 4, the pass-through: price exposure (yes), dividend (processed by Dinari, mechanism documented — live-print status checked per session), voting (no), legal shareholder status (no).
+
+Total return decomposition (each leg dated): R_price tracks NVDA, with the caveat that trading follows the issuer's market schedule (24/5 for eligible assets), so the peg can breathe around US market hours. R_dividend: NVIDIA's declared quarterly distribution (say $0.01, declared 2026-08-26, ex-date pending — re-pull), of which the fraction and lag actually reaching dNVDA holders comes from the issuer's dividend-processing terms, not from the headline. Strip premium/discount: not applicable — no PT/YT venue exists (see below).
+
+Strip extension — HYPOTHETICAL, no live venue as of 2026-09-06: were a dNVDA-YT trading, the method runs: implied forward dividend = (YT price × periods per year) / NVDA price, computed in dollars, compared dated against the declared distribution above. Then the gap menu, in order: special dividend announced? fee or lag in the pass-through? YT print stale or thin? a market view ahead of an announcement? and only then genuine mispricing. Until a venue launches, this section is delivered as method, never as a number.
+
+Custody & eligibility chain: Dinari runs brokerage, settlement, custody, and compliance as one stack — the issuer IS the middle of the chain here, which concentrates and simplifies it at the same time. The dividend path: NVIDIA → brokerage account → Dinari processing → token distribution to holders. Eligibility splits in two and both halves must be answered: legal (KYC per entity, regional restrictions, separate US rules) and contract-level (whether the token's B20 policy scopes actually block a disallowed transfer onchain, or whether enforcement sits only at the mint/redeem gate).
+
+Corporate-action evidence tiers, stated per event type: dividend processing — documented mechanism, live-print status to verify this session. Splits, ticker changes, mergers — the issuer documents processing for each, but until one exercises on Base against these tokens the tier is terms-only, and the answer says so. The NVIDIA 10:1 split of June 2024 predates dShares on Base and is not a print for this claim — history elsewhere is not evidence here. Issuer-level events are a separate layer: an acquisition or pivot at Dinari itself would arrive as policy, not as a processed pass-through — the one print in the class is Backed's acquisition by Kraken and pivot to xStocks (2025-12 → 2026-03), which closed bToken issuance and left redemption open.
+
+Verdict: dNVDA is price exposure to NVIDIA plus a terms-documented dividend stream, minus voting and shareholder status, carried on an actively-issuing issuer with a concentrated custody stack. Conditions this depends on: the holder's jurisdiction clearing eligibility, the dividend pass-through fraction, and the exit path's depth at the moment it is needed. Invalidation triggers: issuer changes to dividend processing or fees; any corporate action exercising onchain (the first real print, either way); eligibility list tightening for the holder's region; a peg break away from the underlying around market-hours boundaries.
+
+Follow-up questions for the next check: what fraction of the declared dividend reached holders on the last pay-date, on what lag; where exactly the enforcement of regional restrictions sits (contract scopes versus mint/redeem gate); and the depth of the dNVDA exit path versus the holder's position size.
+
+One line, every time: this is research, not financial advice; tokenized equity carries tails a traditional share does not — issuer failure, contract risk, corporate-action ambiguity, eligibility revocation.
+
+That is the minimum shape. A line that cannot be filled is not skipped silently — it is named unanalyzed, and "unanalyzed" is itself a finding.

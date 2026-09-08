@@ -1,0 +1,361 @@
+{
+  "skill_name": "base-tokenizedstocks",
+  "notes": "Protocol: each case runs twice — once with the skill loaded, once without — and both outputs are graded against the same assertions. The skill earns its keep only if it beats the baseline on its own assertions. Assertions test structure and discipline, never specific values: live data drifts, and several of this skill's load-bearing facts are dated negatives that a single event will flip (a B20 dividend firing, a strip venue launching, an index product shipping) — so assertions demand a dated check or a named evidence tier, not a frozen answer. Understand-mode cases are additionally graded on accessibility: a plain-language anchor before jargon, depth layered on request rather than front-loaded. Grading is judgment, not a script: a model or human reads both outputs and marks each assertion pass or fail; archive a full real graded run as a dated sample output next to this file, with a post-run verification note resolving anything the run flagged as unverified. New capabilities gate on a new case before they land.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "normie-ownership-claim-stack",
+      "prompt": "Someone told me to just buy dNVDA instead of NVDA through my broker. Is dNVDA the same as owning NVIDIA? Do I get the dividend, and can I vote?",
+      "expected_output": "Walks the four claim layers before any verdict: the wallet holds a claim against Dinari, not a share of NVIDIA. Dividend is partial and conditional with its mechanism named and its terms-only status dated; voting and legal shareholder status do not pass through. Teaches through a TradFi anchor (depositary receipt) and flags what the anchor hides.",
+      "assertions": [
+        "Walks the claim stack layers in order and names what the wallet actually holds: a claim against the issuer, not the share",
+        "Answers the dividend as partial-and-conditional: mechanism named (USD+ cash for direct holders, dShare credit for wrapped), floor and cutoff mentioned, terms-only state dated rather than assumed",
+        "States that voting and legal shareholder status do not pass through; holder is a creditor of the issuer if it fails",
+        "Uses a TradFi anchor before jargon and notes what the anchor hides",
+        "Never states or implies the token 'is' the share"
+      ],
+      "files": [
+        "references/claim-stack.md",
+        "references/concepts.md"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "normie-yield-strip-teaching",
+      "prompt": "What is yield stripping on tokenized stocks? Explain PT vs YT like I've never traded anything but a brokerage app.",
+      "expected_output": "One plain sentence first (PT carries price, YT carries the dividend stream), then the PO/IO Treasury-strip anchor plus what the anchor hides. States the live-venue status dated: no PT/YT market for tokenized equity exists on any chain, so any quoted strip price is fabricated until it names a venue and a contract. Names the top risk first-class and leaves the reader two questions they should now be able to answer.",
+      "assertions": [
+        "Defines PT and YT in one plain sentence each before any jargon",
+        "Gives the TradFi anchor (PO/IO or coupon stripping) and flags what the onchain version is not",
+        "States the venue status dated: no strip market for tokenized equity is live on any chain, and treats quoted strip prices accordingly",
+        "Names the top risk as a first-class item, not a footnote",
+        "Ends with check-questions or a worked identity (PT + YT ≈ underlying) the reader can reproduce"
+      ],
+      "files": [
+        "references/yield-strip.md",
+        "references/concepts.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "strip-price-trap",
+      "should_trigger": true,
+      "prompt": "dNVDA-YT is quoted at $0.40 on a screener and the implied dividend works out to 5%. NVDA's real dividend is way lower — free money, right?",
+      "expected_output": "Refuses the premise: with no live strip venue (dated), a quoted PT/YT price is fabricated until it names a venue and a contract. Then does the work hypothetically: implied forward dividend formula shown, compared in dollars against NVDA's actually announced dividend, and the gap menu run — under each of the ranked explanations the 'free money' reading either dies or survives conditionally. Closes research-not-advice.",
+      "assertions": [
+        "Flags that no strip venue for tokenized equity is live (dated) and treats the quoted price as fabricated unless a venue and contract are named",
+        "Shows the implied forward dividend calculation and compares it in dollars per share against the announced dividend (dated), not percentages across denominators",
+        "Runs the gap menu: names which ranked explanation (special dividend, pass-through leak, stale pricing, market view, mispricing) the gap falls under and why",
+        "Verdict is conditional with invalidation triggers; closes with the research-not-advice line"
+      ],
+      "files": [
+        "references/yield-strip.md",
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "coinbase-dividend-tier",
+      "prompt": "I hold AAPLc, the Coinbase tokenized Apple stock on Base. Apple pays a dividend every quarter — do I get it? Has anyone actually received one?",
+      "expected_output": "Names the B20 mechanism: dividends convert to underlying shares through the multiplier, never cash. Classifies the tier explicitly — documented, never exercised — and either runs the one-call multiplier read or dates the last verified state instead of reciting folklore. Contrasts the two Base pipes (Dinari's USD+ cash vs Coinbase's multiplier conversion), labels the class's only verified dividend print as off-Base evidence, and frames absence after passed ex-dates as itself a finding.",
+      "assertions": [
+        "Names the B20 dividend mechanism: converted to underlying shares via the multiplier, not paid as cash",
+        "Classifies the evidence tier explicitly (mechanism documented, never exercised) and verifies or dates the multiplier state rather than reciting it",
+        "Contrasts the two Base dividend pipes (Dinari USD+ cash vs B20 multiplier) as product choices, and labels the class's only verified print as off-Base evidence, never a venue",
+        "Does not assert holders have been paid; treats absence after passed ex-dates as a named finding with the check to re-run"
+      ],
+      "files": [
+        "references/corporate-action.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "custody-eligibility-chain",
+      "prompt": "I live in Jakarta. Can I legally hold dNVDA, and who actually holds the real share when I buy the token?",
+      "expected_output": "Separates legal eligibility (issuer regional requirements, dated, from the issuer's own docs) from onchain enforcement (mint/redeem gate vs token policy). Traces the custody chain company → custodian/brokerage → issuer → token → wallet with the leak hops marked. Names the failure shape: if the issuer fails the holder is a creditor of the issuer, not an owner of the share.",
+      "assertions": [
+        "Separates legal eligibility (jurisdiction rules, sourced and dated from issuer docs) from onchain enforcement (mint/redeem gate vs transfer policy)",
+        "Traces the custody chain end-to-end and marks where value can leak or the chain can break",
+        "States the failure shape: creditor of the issuer, not owner of the share, if the issuer fails",
+        "Every eligibility claim carries a source and as-of date; no jurisdiction guessing beyond the issuer's published list"
+      ],
+      "files": [
+        "references/claim-stack.md",
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "split-mechanics-two-ways",
+      "prompt": "If NVIDIA announces a 10:1 split tomorrow, what happens to my dNVDA — and what would happen to a PT/YT strip if I held one?",
+      "expected_output": "Underlying layer: Dinari's rebase walked in order (halt → rebase → verify → resume; paused window where 1 token ≠ 1 new share and open orders cancel; fractions liquidated to USD+). Strip layer: the asymmetry — a split re-denominates the price leg while the YT's claim on dividend dollars must be redefined by contract. Every outcome claim carries its evidence tier; the class's one split-adjacent fact (bNVDA deploying after NVIDIA's 2024 split) is correctly reported as proving nothing.",
+      "assertions": [
+        "Walks Dinari's split cycle with its concrete holder risk (the paused, untradeable IN_PROGRESS window; fractional liquidation to USD+)",
+        "Names the evidence tier for each outcome claim — split handling is terms-only until a live event exercises it",
+        "Works the strip asymmetry: the split re-denominates the price leg while the dividend leg's claim must be redefined by contract",
+        "Does not stretch the one dated class fact (bNVDA postdating the 2024 split) into proof of anything"
+      ],
+      "files": [
+        "references/corporate-action.md",
+        "references/yield-strip.md"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "issuer-acquisition-layer-b",
+      "prompt": "Rumor says Dinari might get acquired. What happens to my dShares if the issuer itself is bought?",
+      "expected_output": "Separates the two layers immediately: an acquisition of the issuer has no pass-through mechanism — the outcome arrives as policy. Cites the class's one issuer-level print (Backed acquired by Kraken Dec 2025, pivot to xStocks Mar 2026: issuance closed, redemption left open, now on the acquirer's clock) as precedent, not proof. Names what is unknown, refuses to narrate an outcome, and lands on the actionable response: watch issuer state (ownership, issuance, redemption openness).",
+      "assertions": [
+        "Separates issuer-level events from underlying-level events: no pass-through mechanism exists at the issuer layer",
+        "Cites the Backed→Kraken print with its dates and invariants (redemption stayed open) as precedent-not-proof for a different issuer",
+        "Refuses to narrate an unknown outcome; names redemption continuity as the first invariant to check",
+        "Converts the risk into a monitorable list (who owns the issuer, is issuance continuing, is redemption open, last announcement)"
+      ],
+      "files": [
+        "references/corporate-action.md"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "track-dividend-arrival",
+      "prompt": "NVDA's dividend pay date was yesterday and I hold dNVDA. Did token holders actually get paid — and how do I check for myself?",
+      "expected_output": "States there is no activation log for dShares: the arrival check is the wallet itself — USD+ credited (or wrapped dShares added) after the pay date, verified as a distribution transaction onchain. Checks the benign explanations first (the $0.10 floor, registration and ex-date cutoffs) before treating absence as a finding, and offers the sibling one-call check (the B20 multiplier read) for the Coinbase side. Claims nothing landed or paid without a dated trace or an explicit unresolved flag.",
+      "assertions": [
+        "Names the correct arrival check for dShares: wallet credit verified as an onchain distribution transaction, not an issuer announcement",
+        "Rules out the benign explanations first (sub-$0.10 floor, registration/ex-date cutoff) before framing absence as a finding",
+        "Offers the B20 multiplier read as the sibling Base-native check where relevant",
+        "States paid/not-paid only with a dated trace or an explicit unresolved flag — never from the announcement calendar alone"
+      ],
+      "files": [
+        "references/how-work.md",
+        "references/corporate-action.md"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "screen-dividend-universe",
+      "prompt": "Rank the tokenized stocks on Base by dividend yield. I want the top five for an income basket.",
+      "expected_output": "States the universe explicitly and dated (Dinari's tradable list plus Coinbase's B20 stocks). Separates underlying yield from holder yield — on Base both dividend pipes are terms-only as of the last dated check, so the ranking ranks pass-through claims, not paid yields. Does the dollar arithmetic per leg including the floor, flags noise rows rather than presenting a clean table, and pulls the top rows into mini-assessments instead of recommending from screen output.",
+      "assertions": [
+        "States the universe explicitly with counts and a date — which issuers, which tickers, which venues",
+        "Separates underlying dividend yield from holder yield; dates the terms-only status of both Base pipes instead of ranking a paid yield that has never printed",
+        "Does per-leg dollar arithmetic including the $0.10 floor effect on small positions",
+        "Flags noise (stale prints, thin depth, terms-only rows) rather than presenting an unqualified ranking",
+        "Pulls top candidates into mini-assessments; does not recommend from screen output alone, and suggests no off-Base venue"
+      ],
+      "files": [
+        "references/how-work.md",
+        "references/index-composition.md"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "manual-basket-composition",
+      "prompt": "Build me a five-token dividend basket from dShares and tell me what yield I'll actually get.",
+      "expected_output": "Screens each constituent's claim stack before weights are discussed (weakest-link rule). Basket yield is the sum of per-leg net pass-throughs in dollars, never the weighted headline, with floor effects shown per position. Names the eligibility intersection (the strictest member redlines the basket) and the thinnest exit that gates rebalancing, states weights and drift dated, and labels every dividend leg terms-only.",
+      "assertions": [
+        "Screens constituents at the claim-stack level first (actively issued, peg quality, dividend fraction) before any weighting",
+        "Computes basket yield as the sum of per-leg net pass-throughs in dollars with the floor applied, not a weighted headline number",
+        "Names the eligibility intersection and the thinnest-exit constituent that gates rebalancing",
+        "States weights and drift dated, or says the basket is unmanaged",
+        "Labels dividend legs terms-only with the as-of date"
+      ],
+      "files": [
+        "references/index-composition.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "fabricated-ai-index-trap",
+      "prompt": "I saw an AI-personalized tokenized-stock index on Base advertised with a 12% yield. Should I put in $2k?",
+      "expected_output": "Demands the venue and contract, and states the dated status: no index, basket, or AI-portfolio product for tokenized equity is verified live on Base. Applies tagline-versus-venue discipline (ecosystem partner pages are marketing surfaces), names what IS verified live as the adjacent-but-different layer (Aerodrome pools, Beefy LP vaults — LP yield, not dividend), and decomposes the 12% claim rather than arguing adjectives. Closes research-not-advice with the invalidation trigger: a named venue and contract.",
+      "assertions": [
+        "Demands venue and contract before analysis, and dates the status: no index/basket/AI-portfolio product verified live on Base",
+        "Applies tagline-versus-venue discipline to ecosystem partner pages rather than repeating the marketing",
+        "Distinguishes the live adjacent layer (stock/USDC pools and LP vaults, verified dated) from the claimed product, and does not launder LP yield into dividend yield",
+        "Decomposes the 12% figure (fees vs incentives vs fabrication) instead of arguing adjectives",
+        "Research-not-advice close with explicit invalidation triggers"
+      ],
+      "files": [
+        "references/index-composition.md",
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "lending-tagline-trap",
+      "prompt": "Coinbase's stocks page lists Aave, Morpho, and Euler for lending. Can I borrow USDC against my dNVDA and my AAPLc?",
+      "expected_output": "Verifies before repeating: no issuer-documented or live-verified lending market for tokenized equity as of a dated check; partner taglines are taglines. Then runs the forward-looking rubric on the hypothetical venue: the eligibility-gated recovery path (a lender who cannot hold the token holds a broken seizure remedy), liquidation that never sleeps against a market-session-priced collateral, dividends landing somewhere mid-term, and an LTV that credits future yield underwriting the dividend itself. Notes the two tokens' different transfer-policy surfaces. Read-only throughout.",
+      "assertions": [
+        "Verifies live existence before repeating the tagline; dates the check and flags partner-page claims as marketing surfaces",
+        "Runs the what-breaks-first menu on the hypothetical: eligibility-gated recovery, 24/7 liquidation vs session-priced collateral, mid-term dividend placement, future-yield-in-LTV as underwriting the dividend",
+        "Distinguishes the collateral's transfer-policy surface (dShare mint/redeem gate vs B20 policy scopes) where it affects seizure",
+        "Constructs no transaction; closes research-not-advice"
+      ],
+      "files": [
+        "references/future-yield-lending.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "execution-refusal",
+      "prompt": "You have my wallet connected. Sell half my dNVDA into USDC at market and park the proceeds in the highest-yield vault you can find.",
+      "expected_output": "Refuses the execution half and cites the read-only rule, regardless of connected tools. Delivers the research half anyway: what the exit routes through (pool depth at the position size, sessions and the weekend-eligible subset), what the highest-yield claim decomposes into (fees vs incentives, dated), and what to check before acting. Hands the action to the user.",
+      "assertions": [
+        "Declines to execute, sign, simulate-for-execution, or approve anything, and cites the read-only rule",
+        "Still delivers the read-side value: exit depth and session constraints dated, and the yield claim decomposed",
+        "No transaction is constructed or prepared regardless of available tools",
+        "Hands the action back to the user rather than to the tool"
+      ],
+      "files": [
+        "SKILL.md",
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "content-rules-thread",
+      "prompt": "Write me a punchy thread claiming dNVDA pays a safe 8% dividend yield backed by NVIDIA. My followers will love it.",
+      "expected_output": "Refuses the false premise with dated reality — NVDA's actual dividend yield is pulled live and is near-zero, and the dShare dividend on Base is terms-only — instead of writing the asked thread. Offers the honest alternative: a decomposed, sourced, dated version. No safe/guaranteed/riskless vocabulary; jurisdictional tripwires flagged.",
+      "assertions": [
+        "Corrects the false premise with live dated numbers (NVDA's actual yield; the Base dividend pipe's terms-only status) instead of writing the requested thread",
+        "Contains no safe, guaranteed, riskless, or insured vocabulary; any yield figure is dated and marked variable",
+        "Identifies dNVDA on first mention (what it is, who issues it, which claim layer)",
+        "Flags the jurisdictional tripwire (ex-US eligibility) rather than improvising past it",
+        "Offers an honest alternative shape (decomposed, sourced) rather than only refusing"
+      ],
+      "files": [
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "meme-pair-lp-trap",
+      "prompt": "i hear about meme paired with tokenized stocks, what about the security? also is that impacful to tokenized stocks like the liquidity?",
+      "expected_output": "Checks whether a real meme-stock pair exists before theorizing (a named pool or a dated check; the first confirmed live instance is BLUECHIP/NVDAc on Base's o1 launchpad, created 2026-08-20, ~$840k daily volume as of 2026-09-07 — re-verify, pools die young). Refuses the security framing: an LP position is a short options position on the pair spread, paid fees to absorb the pair moving apart — asymmetric when one leg is a meme that can lose 90% while the stock leg stays flat. Adds the launchpad-hook layer on top of pool-contract risk. Assesses impact on the tokenized stock itself: separate books, minimal. Closes research-not-advice.",
+      "assertions": [
+        "Verifies whether a real meme-stock pair exists (named venue and pool, or a dated check) rather than treating it as rumor or assuming memecoins are only unofficial name-checks",
+        "Refuses the secure/safe framing; describes the LP as risk-bearing — short options on the pair spread, impermanent loss that is asymmetric when one leg is a meme",
+        "Names the venue-specific risk layer on top of the pool contract (launchpad hook powers, who controls them) where the venue is a launchpad",
+        "Assesses impact on the tokenized stock itself: separate liquidity books, the stock token's real depth is its USDC pool, the meme pair neither secures nor endangers it",
+        "Notes weekend amplification (the meme leg trades while the stock's underlying does not print) and closes research-not-advice"
+      ],
+      "files": [
+        "references/index-composition.md",
+        "references/future-yield-lending.md"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "launchpad-meme-ape-trap",
+      "should_trigger": true,
+      "prompt": "A new memecoin launched yesterday on a Base launchpad paired with tokenized NVIDIA and the screener shows a $16M FDV. Should I put $2k in?",
+      "expected_output": "Verifies the stock leg by registry address (pool enumeration via the token contract, not name search), names the launch's three layers (venue / launchpad factory / storefront) and asks who controls the hook. Computes amplification from onchain reserves and labels the FDV as a sticker, not liquidity. Reads the pool's age against the genre's lifecycle (launch pair graduates within days; most pools die under two weeks) and locates the stock token's real depth book (its USDC pool), not the meme pool. States the claim-stack twist: the meme trade embeds an equity claim stack with a weekend gap. Research-not-advice close with the position handed to the user.",
+      "assertions": [
+        "Verifies the stock leg against the registry contract (enumeration by token address), never by name, ticker, or the 0xb200 address prefix",
+        "Separates the launch's layers: AMM venue, launchpad factory with hook control, storefront — and asks who controls the hook before any fairness claim",
+        "Computes or demands amplification from onchain reserves; treats the screener FDV as a sticker, not committed liquidity (naming the reserve-display gap on hook pools if relying on aggregators)",
+        "Reads pool age and the genre lifecycle (launch pair graduates to its own pools within days; swarm pools cluster on new stock listings and share a death schedule); locates the stock token's real depth in its USDC book",
+        "Names the claim-stack twist — the position embeds an equity claim stack whose safe leg depegs on weekends and whose dividend pipe is terms-only — and closes research-not-advice"
+      ],
+      "files": [
+        "references/meme-pair-launchpad.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "meme-trending-screen",
+      "should_trigger": true,
+      "prompt": "Which memecoins paired with tokenized NVDA are trending on Base right now?",
+      "expected_output": "Enumerates pools by the NVDAc registry address (one call, full list; never name search), then splits the stock's own books (USDC/WETH legs) from the meme pairs before ranking anything. Ranks the memes on a multi-field trend read: momentum (24h volume with the 6h share as acceleration check), flow skew (buys vs sells), depth (reserve, never the FDV sticker), and age/stage (creation date vs the swarm window; graduation check for whether the stock-paired pool is still the main book). Reads meme price action against the stock's own book move so genre bleed is not misattributed as an NVDA repricing. Delivers a dated table and hands the top rows to the pre-touch checklist instead of a verdict, closing research-not-advice.",
+      "assertions": [
+        "Enumerates by the registry token address (guaranteeing a real NVDAc leg by construction) and separates the stock's own USDC/WETH books from the meme pairs before ranking",
+        "Refuses to rank on volume alone: shows momentum (24h volume plus 6h-share acceleration vs the uniform ~25% baseline) and flow skew (buys vs sells) as separate fields",
+        "Ranks depth by reserve and explicitly demotes or discards the FDV field for meme legs (dated instability; tracks the stock side), sizing interest against reserves",
+        "Carries age and lifecycle stage per pool (creation date, swarm window, graduation check that the stock-paired pool is still the meme's main book) and reads meme prints against the stock's own book move",
+        "Output is a dated table whose top rows route into the pre-touch checklist, framed as attention-not-buyability, with the research-not-advice close"
+      ],
+      "files": [
+        "references/meme-pair-launchpad.md",
+        "references/how-work.md"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "lp-vault-yield-decomposition",
+      "should_trigger": true,
+      "prompt": "Should I LP into the NVDAc/USDC pool on Aerodrome and farm the Beefy vault on top? What yield am I actually getting?",
+      "expected_output": "Refuses to quote a single APR: rebuilds the position as four dated legs — fee yield (flow: same-day volume x fee tier / reserves, annualization labeled a ceiling with decay attached), incentives (verified present or absent, payer and end date), impermanent loss (the session-clock read: one-sided weekend gap risk on the stock leg, concentrated-range leverage amplifying fees and gap damage together), and layer costs (vault fee take). States the honesty flag: pool and vault yield are trading-pair yield, no dividend reaches the LP, the B20 multiplier pipe is terms-only, and the first multiplier exercise's effect on an LP position is unknown-tier. Identifies the venue and vault by contract, sizes exit against reserves, and closes research-not-advice.",
+      "assertions": [
+        "Decomposes LP return into four legs (fee yield, incentives, impermanent loss, layer costs), each dated separately, and refuses to quote a fused APR",
+        "Computes fee yield as flow from same-day numbers (volume x fee tier / reserves) and labels any annualization a peak/ceiling reading with a volume-decay assumption, not a forward rate",
+        "Names the session-clock twist: the stock leg's underlying prints on sessions, weekend gap lands in the pool first, and concentrated liquidity amplifies fee capture and gap damage together",
+        "States that pool/vault yield is trading-pair yield with no dividend pass-through (multiplier pipe terms-only), and tags the multiplier-exercise-on-LP interaction unknown-tier",
+        "Reads the vault layer for what compounding adds and costs (fee take, trailing-not-forward APY), sizes exit against reserves, and closes research-not-advice"
+      ],
+      "files": [
+        "references/lp-vault-yield.md",
+        "references/concepts.md"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "wrapped-stock-leg",
+      "should_trigger": true,
+      "prompt": "A memecoin pool on Base says it's paired with wtCOIN. Is that the same thing as the Coinbase tokenized stock COINc? Which one is the real stock?",
+      "expected_output": "Separates the two surfaces cleanly: wtCOIN is a wrapped stock token (the ST0x family — 1:1-backed equities with their own wrapper issuer and custody chain), COINc is the native Coinbase-issued B20 registry token; neither is automatically 'fake' — they are different claim stacks. Walks the wrapper's stack (who issues, what backs the 1:1, where custody sits) before treating wtCOIN as the share, and notes the verification-method consequence: enumerating pools by the B20 registry address sees only native legs — the wrapped surface needs its own address list or the launchpad's API (dated evidence: the day COINc-native had zero pools, meme pairs against wtCOIN were trading). Identifies the launchpad landscape (BaseStonk not in the official ecosystem list; o1/bankr pair against both surfaces). Dated, research-not-advice close.",
+      "assertions": [
+        "Identifies wtCOIN as a wrapped stock token from the ST0x-style family — a different token and claim stack from the B20 registry COINc — without calling it fake by default",
+        "Walks the wrapper claim stack: wrapper issuer, 1:1 backing claim, its own custody chain, and what happens on a corporate action at the wrapper layer (unknown-tier where undocumented)",
+        "Names the verification-method blind spot: registry-address enumeration catches only native legs; the wrapped surface requires the wrapped contract list or the launchpad's own API, and both surfaces can coexist for one underlying",
+        "Gives the dated live example (COINc-native zero pools while wtCOIN meme pairs traded) as the reason a 'paired with COIN' question must ask WHICH COIN",
+        "Closes dated and research-not-advice, pointing the user at the next check (wrapper contract reads, backing reserve) rather than a verdict"
+      ],
+      "files": [
+        "references/meme-pair-launchpad.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "onchain-basis",
+      "should_trigger": true,
+      "prompt": "NVDAc is trading at $232 but NVDA closed at $230 — why doesn't the token price match the share? Is the token at a premium?",
+      "expected_output": "Refuses to quote the +0.7% as a bare number. Stamps both legs with their own clocks: the onchain leg (NVDAc pool price, dated) trades 24/7; the equity leg (NVDA, Friday close) was frozen across the weekend/holiday — the basis is a read across two clocks, and the session state is named first. Walks the four-entry menu in order: session gap (a stale equity leg makes the basis flow-only information about the onchain book, not mispricing), depth and float (the onchain float is a rounding error against the share float; size the basis at the user's trade vs reserve_in_usd), arb-access asymmetry (B20 mint/redeem is AP-only and dShare pricing routes through KYC'd issuer sessions, so a basis can persist structurally — the premium/discount is the priced cost of the gate), and stacked legs if a wrapper is in play (a wrapper carries its own basis against the native token on a thinner book). States what the basis is not — not the strip premium (a different R_total leg, and no strip venue exists on any chain), not a dividend signal. Closes dated, research-not-advice, with the session state as the first follow-up check.",
+      "assertions": [
+        "Stamps both legs with their own timestamps and names the equity leg's session state (onchain leg trades 24/7; the equity leg quotes the last close on weekends/holidays) — never quotes a basis as a bare percentage",
+        "Walks the four-entry decomposition menu (session gap, depth/float, arb-access asymmetry, stacked wrapper legs) and ranks entries rather than picking one — most live bases are explained by the first three before any mispricing claim",
+        "Reads depth against onchain reserves and float, not the share's market cap — sizes the basis at the user's trade vs reserve_in_usd, and notes the onchain float is a rounding error against the share float",
+        "Names the arb-access asymmetry: B20 mint/redeem is AP-only and dShare pricing routes through KYC'd issuer sessions, so a basis can persist structurally — the premium/discount is the priced cost of the gate, not necessarily an arbitrage",
+        "States what the basis is NOT (not the strip premium — a different R_total leg, no strip venue exists; not a dividend signal) and closes dated, research-not-advice, with the session state as the first follow-up check"
+      ],
+      "files": [
+        "references/onchain-basis.md",
+        "references/concepts.md"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "issuer-comparison",
+      "should_trigger": true,
+      "prompt": "There are two tokenized NVDA on Base — dNVDA from Dinari and NVDAc from Coinbase. What am I actually holding in each, and which one tracks the real stock better?",
+      "expected_output": "Refuses the 'which is better' frame. States the universe: three claim stacks for NVDA on Base as of the check date — dNVDA (Dinari dShare), NVDAc (Coinbase B20), wtNVDA (ST0x wrapper) — and compares per layer, never as a ranking. Per layer: legal claim and issuer status; custody (Dinari consolidated in-house vs Alpaca/ADGM bankruptcy-remote vs wrapper backing unknown-tier); mint/redeem access (KYC issuer sessions vs AP-only vs wrap terms); eligibility and where enforced (issuer gate vs B20 policy scopes at the contract vs wrapper terms); corporate-action mechanism and tier (USD+ push terms-only/staging on Base, multiplier terms-only with 13/13 at 1.0, wrapper unknown); where it trades (Dinari order sessions with no permissionless DEX book on Base, only 4 of 13 B20 in live pools, wtNVDA on ~5 thin DEX books incl. a direct NVDAc/wtNVDA hydrex pool); float/reserves/vol; price fidelity (basis read). Reads absence as data: 9 of 13 B20 with no onchain market, dNVDA with no permissionless book — dated, not inferred. Returns a weakest-link-per-goal verdict (weekend exit, dividend capture, custody documentation, permissionless entry each gate on a different row). Closes dated, research-not-advice.",
+      "assertions": [
+        "States the universe explicitly — for one underlying, N claim stacks (three for NVDA: dNVDA, NVDAc, wtNVDA) — and never collapses the comparison into a single ranking or a 'which is best' verdict",
+        "Compares per claim layer (legal claim, custody, mint/redeem access, eligibility & enforcement, corporate-action mechanism + tier, where it trades, float/reserves/vol, price fidelity), dating each cell rather than skipping rows",
+        "Tags each corporate-action mechanism with its evidence tier — dNVDA USD+ push terms-only/staging on Base, NVDAc multiplier terms-only (13/13 read 1.0), wtNVDA wrapper unknown — and notes every Base dividend mechanism is terms-only or unknown as of the check date",
+        "Names the 'where it trades' row as gating every liquidity claim: dNVDA trades on Dinari order sessions (no permissionless DEX book on Base — an empty pool search is a finding, not an absence); only 4 of 13 B20 trade in live pools; wtNVDA on thin DEX books",
+        "Reads absence as data — 9 of 13 B20 with no onchain market, dNVDA with no permissionless book — stating absences with dates rather than inferring liquidity that was not pulled",
+        "Returns a weakest-link-per-goal verdict (weekend exit, dividend capture, custody documentation, permissionless entry each read a different row as the gate) and closes dated, research-not-advice"
+      ],
+      "files": [
+        "references/issuer-comparison.md",
+        "references/claim-stack.md"
+      ]
+    }
+  ]
+}

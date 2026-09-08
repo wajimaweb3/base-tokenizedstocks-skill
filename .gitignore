@@ -1,0 +1,16 @@
+# Internal working notes (not shipped)
+DESIGN.md
+RESEARCH.md
+
+# OS / editor
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node (if ever added)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
