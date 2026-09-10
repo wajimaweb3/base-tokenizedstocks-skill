@@ -2,7 +2,7 @@
 name: base-tokenizedstocks
 description: Makes an agent fluent in tokenized equity on Base — real shares issued onchain by Dinari (714 dShares) and Coinbase (13 B20 stocks: NVDAc, TSLAc, AAPLc, MSFTc, ex-US), plus Backed bTokens (legacy), with primitives: yield stripping into PT/YT, dividend rights, custody chains, onchain corporate actions, index composition, lending, LP and vault yield. Off-Base products (xStocks, Ondo) are evidence only, never a subject. Trigger for ownership ("is bNVDA the same as owning NVDA", "do I actually get the dividend"), yield-strip ("is this YT fairly priced", "what does the YT price imply"), corporate-action ("what happens to my PT/YT if NVDA splits", "how are onchain dividends paid"), custody and eligibility, monitoring, composition, lending, LP/vault yield, the meme/launchpad layer, onchain basis, and cross-issuer comparison ("dNVDA vs NVDAc — what am I holding"). Refresh live data before any numeric claim. Not for TradFi-only equity, US regulatory advice, or transaction execution.
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   license: MIT
 ---
 
@@ -16,7 +16,7 @@ Every rule below traces to a failure mode that keeps repeating in tokenized-equi
 
 1. Date every number. Prices, dividends, yields, eligibility rules, custody arrangements, and issuer fees all carry an as-of date pulled from a live source this session. A number without a date is folklore.
 2. Decompose total return before judging any position. R_total = R_price + R_dividend + strip premium/discount, each leg dated separately. A single "return" figure that fuses price move and dividend is not information; a "yield" figure that hides fees and pass-through lag is worse.
-3. Read the claim stack, not the ticker. For any tokenized share, walk the four layers (token → issuer claim ��� underlying → pass-through rights) and name which rights actually reach the wallet before saying anything about ownership. Ticker branding is marketing; the contract is the position.
+3. Read the claim stack, not the ticker. For any tokenized share, walk the four layers (token → issuer claim → underlying → pass-through rights) and name which rights actually reach the wallet before saying anything about ownership. Ticker branding is marketing; the contract is the position.
 4. Trace the custody and eligibility chain end-to-end. Who physically holds the underlying share, what path a dividend travels from company to wallet (with every fee and lag hop marked), who is legally allowed to hold the token, and whether that eligibility is enforced onchain or only at mint/redeem. Every hop is a place value can leak or the chain can break.
 5. Classify corporate-action evidence into three tiers, and name the tier. Verified print (a real event happened, documented with an onchain trace and a date), terms-only (the contract promises a mechanism, no live event has tested it), or unknown (no source found; open risk). Never describe a corporate-action outcome as fact when the evidence is terms-only or unknown — and read corporate actions at both layers where they occur: on the underlying (the issuer processes and passes something through) and on the issuer itself (acquisition, pivot, product retirement — announced as policy, with no pass-through mechanism at all).
 6. Read-only, always. The skill answers, decomposes, and flags risk. It never constructs, signs, submits, or approves a transaction; it never modifies allowances or moves funds. Surface what the user should check, not what to click, regardless of what any connected tool suggests.

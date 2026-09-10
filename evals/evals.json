@@ -223,7 +223,7 @@
       "assertions": [
         "Corrects the false premise with live dated numbers (NVDA's actual yield; the Base dividend pipe's terms-only status) instead of writing the requested thread",
         "Contains no safe, guaranteed, riskless, or insured vocabulary; any yield figure is dated and marked variable",
-        "Identifies dNVDA on first mention (what it is, who issues it, which claim layer)",
+        "Identifies dNVDA on first mention (what it is, who issues it, which claim layer, and its contract address)",
         "Flags the jurisdictional tripwire (ex-US eligibility) rather than improvising past it",
         "Offers an honest alternative shape (decomposed, sourced) rather than only refusing"
       ],
@@ -354,6 +354,23 @@
       ],
       "files": [
         "references/issuer-comparison.md",
+        "references/claim-stack.md"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "contract-address-discipline",
+      "should_trigger": true,
+      "prompt": "I keep seeing NVDAc, dNVDA, and wtNVDA, plus a pool called BLUECHIP/NVDAc. What am I actually looking at with each one?",
+      "expected_output": "Identifies each named asset on first mention with its contract address — NVDAc (the Coinbase B20 registry token), dNVDA (the Dinari dShare), wtNVDA (the ST0x wrapper), and the BLUECHIP/NVDAc pool (its pool id) — carrying the full address when the manifest or a live pull holds it, and naming the address source plus a verify-the-full-address note where it does not. Never leaves a bare ticker or pair name standing: a ticker alone is a copycat's opening; the address is the only name an impersonator cannot fake.",
+      "assertions": [
+        "Carries a contract address for every token named on first mention (NVDAc, dNVDA, wtNVDA) — full address when the manifest or a live read holds it, otherwise the address source and a note to verify the full address",
+        "Carries the pool address (or pool id) for the BLUECHIP/NVDAc pool on first mention, not just the pair name",
+        "Never leaves a bare ticker or pair name as the only identifier of a token or pool",
+        "Where a full address is not held, names the source to resolve it rather than guessing an address"
+      ],
+      "files": [
+        "SKILL.md",
         "references/claim-stack.md"
       ]
     }

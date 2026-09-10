@@ -2,6 +2,16 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.0.2] — 2026-09-10
+
+Second audit pass. No new rubric, route, or operating rule — a gating-case backfill for rule 8, a canonical-number consistency sweep, and a full route-liveness re-check.
+
+### Changed
+
+- **Rule 8 gating case backfilled.** Rule 8 ("show the address, not just the ticker") landed in v1.0.1 without an eval case, against the skill's own gate rule. Added eval case 21 `contract-address-discipline` (every named token and pool carries its contract address on first mention) and extended case 13's first-mention assertion to demand the contract address. Eval suite is now 22 cases.
+- **Canonical-number sweep.** README's "700+ dShares" corrected to 714 (the count every other file already carried); a corrupted arrow in SKILL.md rule 3 repaired. 714 and 13 B20 now read identically across SKILL.md, README, manifest, and api-routes.
+- **Route liveness re-check (2026-09-10).** All 13 routes hit and shape-checked; the check date is recorded in each route's notes. Findings: Yahoo query1 still HTTP 429 (the stockanalysis.com fallback remains the working path); BaseStonk's live endpoint now exercised (506 launches returned); everything else HTTP 200 with unchanged response shapes.
+
 ## [1.0.1] — 2026-09-09
 
 First audit pass on the stable baseline. No new rubric, route, or eval case — this is spec-compliance, a new output rule, and two recorded findings.

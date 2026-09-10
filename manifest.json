@@ -1,6 +1,6 @@
 {
  "name": "base-tokenizedstocks-docs",
- "version": "1.0.1",
+ "version": "1.0.2",
  "what_this_is": "An address book of primary documentation for tokenized equity on Base. It is not the skill itself — SKILL.md holds the frameworks; this file tells the agent which official docs exist, which URL to open, and which analysis each source serves. Do not ingest the whole list into context: identify the issuer or data need under analysis, then fetch only the matching rows. Liveness verified 2026-09-06. Re-verify any row on first use in a session.",
  "how_to_use": [
   "Identify what the question needs: issuer terms (Dinari, Coinbase, Backed), the token standard (B20), or market data (price, dividends).",

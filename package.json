@@ -1,6 +1,6 @@
 {
   "name": "base-tokenizedstocks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A skill pack that makes an AI agent fluent in tokenized equity on Base — claim stacks, dividend pass-through, yield stripping, corporate-action evidence, onchain basis, and cross-issuer comparison for dShares (Dinari) and B20 stocks (Coinbase), with Backed bTokens as a legacy line.",
   "license": "MIT",
   "keywords": [
