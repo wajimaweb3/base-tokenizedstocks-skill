@@ -1,6 +1,6 @@
 {
   "name": "base-tokenizedstocks API router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "what_this_is": "The data twin of manifest.json. manifest.json says where the documentation lives; this file says which endpoint answers which question. Match the user's question to a row's 'answers' patterns, then fetch. Route and fetch — do not load the whole file into reasoning.",
   "how_to_route": [
     "STACK ROWS. One question usually needs several rows: 'is this implied dividend real' is the underlying price PLUS the dividend calendar PLUS the eligibility/custody terms. Never stop at the first row that matches.",

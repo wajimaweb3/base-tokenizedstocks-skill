@@ -2,6 +2,20 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.0.1] — 2026-09-09
+
+First audit pass on the stable baseline. No new rubric, route, or eval case — this is spec-compliance, a new output rule, and two recorded findings.
+
+### Changed
+
+- **Description frontmatter trimmed (2860 → 992 chars).** The v1.0.0 description exceeded Anthropic's 1024-char limit, which claude.ai rejects at upload. Trimmed to the issuer identities, the primitive list, one or two trigger examples per category, and the three exclusions. No trigger coverage lost.
+- **New operating rule 8 — "Show the address, not just the ticker."** Every token, pool, or contract named in an answer now carries its contract address on first mention (full address when known, otherwise the source and a verify-the-full-address note). A ticker alone is a copycat's opening. Reinforced in the runtime routine's asset-identification step.
+
+### Recorded (RESEARCH.md evidence ledger)
+
+- **vvveity launchpad** (docs at stock.vvveity.com/docs) — a stock-paired launchpad not in Base's official ecosystem list, surfaced via web search in a claude.ai browser test. Added to `meme-pair-launchpad.md` as an unverified-until-enumerated fifth factory-layer entry.
+- **claude.ai browser test finding** — keyless routes are partially blocked in the claude.ai sandbox (a docs.base.org curl failed), and the skill falls back to web search; the verify-by-address discipline held even over the uncured surface (it flagged the CoinGecko "Stonks" cross-chain trap). Claude Code remains the venue for validating live numbers.
+
 ## [1.0.0] — 2026-09-08
 
 First stable baseline. Everything accumulated before this version is the baseline; the feature counter starts from zero at this major. Bumping major from here is a human decision.
