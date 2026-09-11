@@ -373,6 +373,24 @@
         "SKILL.md",
         "references/claim-stack.md"
       ]
+    },
+    {
+      "id": 22,
+      "name": "dshare-price-cross-issuer-basis",
+      "should_trigger": true,
+      "prompt": "What is dNVDA trading at right now, and is it at a premium or discount to NVDAc?",
+      "expected_output": "Pulls dNVDA's price from the keyless CoinGecko route (dshare-price) and labels it a reference price — CoinGecko's aggregate of the Dinari order-session prints, not a permissionless DEX price (dShares have no DEX book on Base). Pulls NVDAc from the token-price route (GeckoTerminal). Computes the cross-issuer basis between the two NVDA claim stacks, stamps both legs with their own timestamps, and names the session state. Notes the float/depth asymmetry between the two stacks before calling any spread a mispricing. Closes dated, research-not-advice.",
+      "assertions": [
+        "Pulls dNVDA's price from the keyless CoinGecko route and labels it a reference price (order-session aggregate), not a DEX price — dShares have no permissionless DEX book on Base",
+        "Pulls NVDAc from the token-price route and stamps both legs with their own timestamps",
+        "Computes the cross-issuer basis between the two NVDA claim stacks and names the session state rather than quoting a bare spread",
+        "Notes the float/depth asymmetry between the two stacks before calling the spread a mispricing",
+        "Closes dated, research-not-advice"
+      ],
+      "files": [
+        "references/issuer-comparison.md",
+        "references/onchain-basis.md"
+      ]
     }
   ]
 }

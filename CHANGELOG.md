@@ -2,6 +2,16 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.1.0] — 2026-09-10
+
+First feature since the stable baseline: a keyless dShare price route.
+
+### Added
+
+- **`dshare-price` route (CoinGecko, keyless).** dShares have no permissionless DEX book on Base — they trade on Dinari's order sessions — so GeckoTerminal returns empty by design and the issuer's own API is keyed (X-API-Key-Id + X-API-Secret-Key, enterprise-only). CoinGecko lists the major dShares and ETFs with live prices, closing the gap that left `issuer-comparison.md` and `onchain-basis.md` unable to run on dShares. The route labels the price a reference print (order-session aggregate, not a DEX price), stamps `last_updated_at`, and notes the keyed-if-in-env pattern for a CoinGecko demo key.
+- **Wired into two rubrics.** `issuer-comparison.md`: the dNVDA float/vol and price-fidelity rows now carry the CoinGecko reference read, and the "absence is data" paragraph records that the keyless route exists while the no-DEX-book absence stands. `onchain-basis.md`: the arb-access entry and the worked-set note now distinguish the dShare's reference basis (order-session aggregate vs underlying) from an onchain basis.
+- **Gating case 22 `dshare-price-cross-issuer-basis`.** Eval suite is now 23 cases.
+
 ## [1.0.2] — 2026-09-10
 
 Second audit pass. No new rubric, route, or operating rule — a gating-case backfill for rule 8, a canonical-number consistency sweep, and a full route-liveness re-check.

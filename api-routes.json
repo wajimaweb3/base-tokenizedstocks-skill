@@ -1,6 +1,6 @@
 {
   "name": "base-tokenizedstocks API router",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "what_this_is": "The data twin of manifest.json. manifest.json says where the documentation lives; this file says which endpoint answers which question. Match the user's question to a row's 'answers' patterns, then fetch. Route and fetch — do not load the whole file into reasoning.",
   "how_to_route": [
     "STACK ROWS. One question usually needs several rows: 'is this implied dividend real' is the underlying price PLUS the dividend calendar PLUS the eligibility/custody terms. Never stop at the first row that matches.",
@@ -111,7 +111,20 @@
       "base": "https://api.geckoterminal.com",
       "auth": "keyless",
       "example": "GET /api/v2/networks/base/tokens/{contract_address} — price and liquidity pools for an ERC-20/B20 token on Base; resolve the contract address from the issuer docs first",
-      "notes": "Rate-limited public API. This prices a tokenized stock on Base (a Dinari dShare, a Coinbase B20, or an ST0x wrapper like wtNVDA), not strip legs. Contract addresses live with the issuer (manifest rows dinari-dshares, coinbase-stocks, basestonk-launchpad); do not guess addresses. Verified response shape 2026-09-08: price_usd, total_reserve_in_usd, normalized_total_supply (the onchain float), and relationships under top_pools (NOT pools). Verify the token by address, never by symbol — AAPLc displays as 'AAPL' on GeckoTerminal. An empty result is a finding, not a void: dShares trade on Dinari's order sessions (not permissionless DEX pools), so a dNVDA search returns empty by design; only 4 of 13 B20 trade in live pools at all (NVDAc, GOOGLc, AAPLc, METAc per docs.basestonk.io/stock-pairs.md, 2026-09-08). Thin liquidity here is itself a finding (gap-menu entry #3). For baskets: this row is the exit-depth check per constituent — the rebalance is gated by the thinnest pool, not the average (index-composition.md, Part A). Pair with the underlying-price route to compute the onchain basis (onchain-basis route; references/onchain-basis.md). Liveness re-check 2026-09-10: HTTP 200; wtNVDA read returned price_usd / total_reserve_in_usd / normalized_total_supply / top_pools — shape unchanged."
+      "notes": "Rate-limited public API. This prices a tokenized stock on Base (a Dinari dShare, a Coinbase B20, or an ST0x wrapper like wtNVDA), not strip legs. Contract addresses live with the issuer (manifest rows dinari-dshares, coinbase-stocks, basestonk-launchpad); do not guess addresses. Verified response shape 2026-09-08: price_usd, total_reserve_in_usd, normalized_total_supply (the onchain float), and relationships under top_pools (NOT pools). Verify the token by address, never by symbol — AAPLc displays as 'AAPL' on GeckoTerminal. An empty result is a finding, not a void: dShares trade on Dinari's order sessions (not permissionless DEX pools), so a dNVDA search returns empty by design; only 4 of 13 B20 trade in live pools at all (NVDAc, GOOGLc, AAPLc, METAc per docs.basestonk.io/stock-pairs.md, 2026-09-08). Thin liquidity here is itself a finding (gap-menu entry #3). For baskets: this row is the exit-depth check per constituent — the rebalance is gated by the thinnest pool, not the average (index-composition.md, Part A). Pair with the underlying-price route to compute the onchain basis (onchain-basis route; references/onchain-basis.md). Liveness re-check 2026-09-10: HTTP 200; wtNVDA read returned price_usd / total_reserve_in_usd / normalized_total_supply / top_pools — shape unchanged. For the dShare reference price (no DEX book — GeckoTerminal returns empty by design), use the dshare-price route (CoinGecko)."
+    },
+    {
+      "id": "dshare-price",
+      "answers": [
+        "what is dNVDA trading at",
+        "dShare price on Dinari",
+        "is the dShare at a premium to the B20 token",
+        "cross-issuer basis between dShare and B20"
+      ],
+      "base": "https://api.coingecko.com",
+      "auth": "keyless",
+      "example": "GET /api/v3/simple/price?ids={coin-id}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_last_updated_at=true — resolve the coin id via GET /api/v3/search?query={ticker or 'dinari tokenized'} (dNVDA = nvidia-dinari-tokenized-stock, dAAPL = apple-dinari-tokenized-stock, NVDAc = nvidia-coinbase-tokenized-stock)",
+      "notes": "THE KEYLESS dSHARE PRICE ROUTE. dShares have no permissionless DEX book on Base — they trade on Dinari's order sessions — so GeckoTerminal returns empty by design; CoinGecko is the keyless read of where the dShare prints. The price is CoinGecko's aggregate of the Dinari order-session prints: a REFERENCE price, not a DEX price, and it can go stale outside order sessions (stamp last_updated_at). Coverage is the major dShares and ETFs (NVDA, AAPL, TSLA, MSFT, GOOGL, AMZN, META, COIN, AMD, AVGO, and peers), not all 714. Verified 2026-09-10 keyless: dNVDA $223.64 vs NVDAc $223.49 (~0.07% cross-issuer spread), dAAPL $319.07. Free tier is keyless but rate-limited; a CoinGecko demo key in the environment lifts the limit (keyed-if-in-env, same pattern as defi-native). Pair with token-price (GeckoTerminal) to compute the cross-issuer basis (dNVDA vs NVDAc) and with underlying-price for the dShare basis against the share — both legs stamped with their own timestamps. The issuer's own API (api-enterprise.sbt.dinari.com) is keyed (X-API-Key-Id + X-API-Secret-Key, enterprise-only) — not a keyless path."
     },
     {
       "id": "strip-implied-yield",
