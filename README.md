@@ -2,7 +2,7 @@
 
 A skill pack that makes an AI agent fluent in **tokenized equity on Base** — real shares issued onchain by two live issuers (Dinari: 714 dShares; Coinbase: 13 B20 stocks, NVDAc to TSLAc), and the primitives being built on top of them. Base is the skill's only subject: off-Base products enter solely as evidence about the class, never as venues.
 
-Drop it into Claude, ChatGPT/Codex, Grok, Cursor, or any agent harness, and the agent stops answering tokenized-stock questions with generic finance boilerplate and starts answering them the way an equity-native analyst would: claims before tickers, decomposition before verdicts, evidence tiers before promises.
+Drop it into Claude, ChatGPT/Codex, Grok, Cursor, or any agent harness, and the agent stops answering tokenized-stock questions with generic finance boilerplate and starts answering them the way a tokenized-stock analyst would: claims before tickers, decomposition before verdicts, evidence tiers before promises.
 
 ## What it does
 

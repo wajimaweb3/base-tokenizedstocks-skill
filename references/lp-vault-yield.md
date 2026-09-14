@@ -23,7 +23,7 @@ Both legs of a stock/USDC pool run on different clocks. The USDC leg never sleep
 
 ## What the yield is NOT: no dividend reaches the pool
 
-This is the honesty flag that separates an equity-native read from a screener read: pool fee yield and vault APY are **trading-pair yield** — fees paid by swappers. NVDA's dividend does not flow through the pool to the LP, and the B20 dividend pipe is terms-only (all thirteen multipliers read exactly 1.0 as of the 2026-09-07 sweep; corporate-action.md). Quoting a vault APR as "yield on tokenized NVDA" fuses two different claim layers. And the forward question is genuinely open-tier: when a B20 multiplier update eventually fires, the pool holds raw token balances while redemption value shifts via the multiplier — what that does to pool pricing and LP positions has never been exercised (unknown tier, not terms-only — the interaction is undocumented).
+This is the honesty flag that separates a tokenized-stock read from a screener read: pool fee yield and vault APY are **trading-pair yield** — fees paid by swappers. NVDA's dividend does not flow through the pool to the LP, and the B20 dividend pipe is terms-only (all thirteen multipliers read exactly 1.0 as of the 2026-09-07 sweep; corporate-action.md). Quoting a vault APR as "yield on tokenized NVDA" fuses two different claim layers. And the forward question is genuinely open-tier: when a B20 multiplier update eventually fires, the pool holds raw token balances while redemption value shifts via the multiplier — what that does to pool pricing and LP positions has never been exercised (unknown tier, not terms-only — the interaction is undocumented).
 
 ## The vault layer: what auto-compounding adds and costs
 
