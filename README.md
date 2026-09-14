@@ -1,5 +1,7 @@
 # base-tokenizedstocks
 
+[![skills.sh](https://skills.sh/b/wajimaweb3/base-tokenizedstocks-skill)](https://skills.sh/wajimaweb3/base-tokenizedstocks-skill)
+
 A skill pack that makes an AI agent fluent in **tokenized equity on Base** — real shares issued onchain by two live issuers (Dinari: 714 dShares; Coinbase: 13 B20 stocks, NVDAc to TSLAc), and the primitives being built on top of them. Base is the skill's only subject: off-Base products enter solely as evidence about the class, never as venues.
 
 Drop it into Claude, ChatGPT/Codex, Grok, Cursor, or any agent harness, and the agent stops answering tokenized-stock questions with generic finance boilerplate and starts answering them the way a tokenized-stock analyst would: claims before tickers, decomposition before verdicts, evidence tiers before promises.
@@ -78,7 +80,7 @@ base-tokenizedstocks/
 
 Manual (works now): clone or copy this folder into your agent's skills directory (for Claude Code: `.claude/skills/` in a project, or `~/.claude/skills/` globally). The skill activates on the triggers in `SKILL.md`.
 
-Skills CLI (pending publication): `npx skills add <owner>/base-tokenizedstocks` once the repository is published.
+Skills CLI: `npx skills add wajimaweb3/base-tokenizedstocks-skill` — the CLI detects your agent (Claude Code, Cursor, Codex, Windsurf, Gemini, and more) and installs into its skills directory. Run `npx skills update` to pull future versions.
 
 ## License
 
