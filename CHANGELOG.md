@@ -2,6 +2,31 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.2.1] — 2026-09-14
+
+Audit pass on the build surface: the derive-the-universe schema. No new rubric or route — a discipline change across the skill's surface, driven by the unit test (case 23 `build-surface-dev`) that caught the "4 of 13 in live pools" whitespace negative already stale six days after v1.2.0 shipped (Beefy then read 10 stock-USDC vaults). Supersedes hardcoded static counts with "state the anchor, derive the count."
+
+### Changed
+
+- **Rule 9 added to SKILL.md — "Derive the universe, don't state it."** Token, pool, and vault counts (13 B20 tokens, 4 of 13 in live pools, 9 Beefy vaults, ~30 meme pools) are session facts: the agent pulls the set from the registry and live enumeration (routes `b20-multiplier`, `meme-stock-pools`, `token-price`, `stock-yield-vaults`, `basestonk-launches`) rather than quoting a snapshot. Dated counts in the pack are worked examples for sanity-checking, never assumptions the answer carries.
+- **Count sweep across the surface.** Every "N of 13" / "~N pools" / "N vaults" / "N launches" stated in `build-surface.md` (all three layers + the build-read discipline gains a sixth point "state the anchor, derive the count"), `how-work.md` (build-mode step 2), `issuer-comparison.md` ("where it trades" row + "absence is data"), `meme-pair-launchpad.md`, `README.md`, `manifest.json` (dshares + coinbase-stocks rows), and `api-routes.json` (`token-price`, `meme-stock-pools`, `stock-yield-vaults`, `basestonk-launches`, `b20-multiplier`) now reads as *method + dated snapshot*: derive the set per session, keep the snapshot as a sanity-check baseline, never reproduce it as the count.
+- **Eval assertions brought in line with the protocol's own rule.** The suite's notes already said "assertions test structure and discipline, never specific values: live data drifts" — but case 20 `issuer-comparison` and case 23 `build-surface-dev` hardcoded "4 of 13" and "9 of 13", which would fail any agent that correctly derived the live count. Reframed to assert the discipline (derive the pool set per session, date every negative) with the snapshot admitted only as a named reference, satisfying the protocol the suite already claimed.
+- **Description frontmatter and manifest version bumped** to 1.2.1; description trimmed the volatile "714 dShares / 13 B20" counts (trigger coverage unchanged — the ticker anchors remain).
+
+### Recorded (unit-test finding, 2026-09-14)
+
+- **Whitespace negative "9 of 13 B20 without an onchain market" requires re-verification.** Independent checks today: Beefy API reads **10 active stock-USDC vaults** on Base (AAPLc, AMZNc, GOOGLc, METAc, MSFTc, MSTRc, NVDAc, SNDKc, SPCXc, TSLAc — the v1.2.0 state was 4), implying live Aerodrome books for at least ten B20 tokens, not four. `docs.basestonk.io/stock-pairs.md` still reads "four trade in live pools" but that is the launchpad's pair-gate stance (it refuses Aerodrome pools), not evidence of absence. The skill now handles this exactly as designed: the count is no longer in the pack — the agent derives it per session. Treat "which B20 trade live" as flippable until a full per-token registry enumeration this session settles it.
+
+## [1.2.0] — 2026-09-11
+
+First developer-audience feature: the build surface.
+
+### Added
+
+- **`build-surface.md` rubric.** The map of what can be built on Base tokenized equity, in three layers — rails (the B20 standard with its multiplier and policy-scope reads, the onchain registry, the custody chain, the data rails), integration points (Aerodrome stock/USDC pools, Beefy vaults, the launchpads with their hook-permission read), and whitespace (the dated negatives — no strip venue, no lending market, no index product, 9 of 13 B20 without a pool — each named with the rail it would sit on). Names docs.base.org as the documentation home, distinct from the ecosystem announcement's tagline surface.
+- **"build" task mode (fifth) in `how-work.md`.** Classifies the build intent (integrate / extend / fill), maps the three layers, and states what any build inherits (weekend gap, terms-only dividend, eligibility gating, issuer risk).
+- **Gating case 23 `build-surface-dev`.** Eval suite is now 24 cases.
+
 ## [1.1.0] — 2026-09-10
 
 First feature since the stable baseline: a keyless dShare price route.

@@ -1,6 +1,6 @@
-# Task modes: understand, valuate, screen, track
+# Task modes: understand, valuate, screen, track, build
 
-Four modes cover every job a user brings to this skill. The domain rubrics (claim-stack, yield-strip, corporate-action, and the ones that follow) say WHAT to think about; this file says HOW to shape the answer for the job the user is actually doing. Every mode inherits the operating rules from SKILL.md (dated numbers, decomposed total return, claim-stack reading, evidence tiers, read-only).
+Five modes cover every job a user brings to this skill. The domain rubrics (claim-stack, yield-strip, corporate-action, and the ones that follow) say WHAT to think about; this file says HOW to shape the answer for the job the user is actually doing. Every mode inherits the operating rules from SKILL.md (dated numbers, decomposed total return, claim-stack reading, evidence tiers, read-only).
 
 Content style (threads, tables, one-pagers) is a delivery layer that rides on top of these modes, not a mode of its own. When a user asks for a "thread on this strip" or a "comparison table of issuers", pick the underlying mode (usually valuate or screen), do the work, then render in the requested format under the content rules below.
 
@@ -71,9 +71,22 @@ Shape of the answer:
 4. Recommend one action per event or none: watch, size down, exit, do nothing. Action without a mechanism is a hunch.
 5. Restate the next check cadence (weekly for calendar events, immediate for corporate actions and terms diffs).
 
+## Build: mapping the surface for a developer
+
+For questions like "what can I build on Base tokenized equity", "what frameworks, tools, or schemes does Base provide", "what launchpad details do I need before building", "what is the whitespace — what does not exist yet". The user is a developer asking about the surface, not a holder asking about a position. The failure mode is answering a build question as a position question (a price, a yield) or repeating an ecosystem tagline as a live venue.
+
+Shape of the answer:
+
+1. Classify the build intent: integrate (plug into a live venue), extend (build on an existing rail), or fill (build the whitespace — a primitive that does not exist yet). The three intents read different parts of `references/build-surface.md`.
+2. Map the three layers from `build-surface.md`: rails (contract-level primitives that exist — B20 standard, registry, custody chain, data rails), integration points (live venues — Aerodrome pools, Beefy vaults, launchpads), and whitespace (dated negatives — no strip venue, no lending market, no index product, the B20-without-a-pool set derived from the registry per session; 9 of 13 on 2026-09-08, re-derive).
+3. Name every rail and venue by address, not ticker (rule 8), and state the read a builder must do before trusting it: the B20 multiplier, the hook permission mask, the policy scopes.
+4. Date the negatives that bound the build. Whitespace is the volatile layer — "no strip venue" was true on 2026-09-06 and is a one-launch fact; re-verify before asserting it.
+5. State what the build inherits: the weekend gap (two clocks), the terms-only dividend (multiplier 1.0), eligibility gating (policy scopes), and issuer risk (a claim stack, not a share). A design that ignores one of these breaks on the first weekend, the first ex-date, or the first policy action.
+6. Read-only: describe what to check and what the surface supports, never scaffold, deploy, or sign. The skill maps the surface; it does not build on it.
+
 ## Content style (delivery, not a mode)
 
-When any of the four modes is asked to deliver as a thread, comparison table, one-pager, or explainer for a specific audience, the rules that always apply:
+When any of the five modes is asked to deliver as a thread, comparison table, one-pager, or explainer for a specific audience, the rules that always apply:
 
 1. Never state or imply a future yield. Any dividend, implied yield, or return number is dated and marked variable.
 2. No "safe", "riskless", "guaranteed", "insured" — tokenized equity has issuer risk, contract risk, and corporate-action ambiguity that a share does not.

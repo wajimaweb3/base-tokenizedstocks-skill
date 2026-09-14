@@ -343,13 +343,13 @@
       "name": "issuer-comparison",
       "should_trigger": true,
       "prompt": "There are two tokenized NVDA on Base — dNVDA from Dinari and NVDAc from Coinbase. What am I actually holding in each, and which one tracks the real stock better?",
-      "expected_output": "Refuses the 'which is better' frame. States the universe: three claim stacks for NVDA on Base as of the check date — dNVDA (Dinari dShare), NVDAc (Coinbase B20), wtNVDA (ST0x wrapper) — and compares per layer, never as a ranking. Per layer: legal claim and issuer status; custody (Dinari consolidated in-house vs Alpaca/ADGM bankruptcy-remote vs wrapper backing unknown-tier); mint/redeem access (KYC issuer sessions vs AP-only vs wrap terms); eligibility and where enforced (issuer gate vs B20 policy scopes at the contract vs wrapper terms); corporate-action mechanism and tier (USD+ push terms-only/staging on Base, multiplier terms-only with 13/13 at 1.0, wrapper unknown); where it trades (Dinari order sessions with no permissionless DEX book on Base, only 4 of 13 B20 in live pools, wtNVDA on ~5 thin DEX books incl. a direct NVDAc/wtNVDA hydrex pool); float/reserves/vol; price fidelity (basis read). Reads absence as data: 9 of 13 B20 with no onchain market, dNVDA with no permissionless book — dated, not inferred. Returns a weakest-link-per-goal verdict (weekend exit, dividend capture, custody documentation, permissionless entry each gate on a different row). Closes dated, research-not-advice.",
+      "expected_output": "Refuses the 'which is better' frame. States the universe: three claim stacks for NVDA on Base as of the check date — dNVDA (Dinari dShare), NVDAc (Coinbase B20), wtNVDA (ST0x wrapper) — and compares per layer, never as a ranking. Per layer: legal claim and issuer status; custody (Dinari consolidated in-house vs Alpaca/ADGM bankruptcy-remote vs wrapper backing unknown-tier); mint/redeem access (KYC issuer sessions vs AP-only vs wrap terms); eligibility and where enforced (issuer gate vs B20 policy scopes at the contract vs wrapper terms); corporate-action mechanism and tier (USD+ push terms-only/staging on Base, multiplier terms-only with every registry multiplier at 1.0 at the check date, wrapper unknown); where it trades (Dinari order sessions with no permissionless DEX book on Base, the B20 live-pool set derived per session — the 09-08 snapshot read 4 of 13 — wtNVDA on ~5 thin DEX books incl. a direct NVDAc/wtNVDA hydrex pool); float/reserves/vol; price fidelity (basis read). Reads absence as data: the B20-without-a-market set derived from registry enumeration (not a stale count), dNVDA with no permissionless book — dated, not inferred. Returns a weakest-link-per-goal verdict (weekend exit, dividend capture, custody documentation, permissionless entry each gate on a different row). Closes dated, research-not-advice.",
       "assertions": [
         "States the universe explicitly — for one underlying, N claim stacks (three for NVDA: dNVDA, NVDAc, wtNVDA) — and never collapses the comparison into a single ranking or a 'which is best' verdict",
         "Compares per claim layer (legal claim, custody, mint/redeem access, eligibility & enforcement, corporate-action mechanism + tier, where it trades, float/reserves/vol, price fidelity), dating each cell rather than skipping rows",
-        "Tags each corporate-action mechanism with its evidence tier — dNVDA USD+ push terms-only/staging on Base, NVDAc multiplier terms-only (13/13 read 1.0), wtNVDA wrapper unknown — and notes every Base dividend mechanism is terms-only or unknown as of the check date",
-        "Names the 'where it trades' row as gating every liquidity claim: dNVDA trades on Dinari order sessions (no permissionless DEX book on Base — an empty pool search is a finding, not an absence); only 4 of 13 B20 trade in live pools; wtNVDA on thin DEX books",
-        "Reads absence as data — 9 of 13 B20 with no onchain market, dNVDA with no permissionless book — stating absences with dates rather than inferring liquidity that was not pulled",
+        "Tags each corporate-action mechanism with its evidence tier — dNVDA USD+ push terms-only/staging on Base, NVDAc multiplier terms-only (registry multipliers all read 1.0 at the check date), wtNVDA wrapper unknown — and notes every Base dividend mechanism is terms-only or unknown as of the check date",
+        "Names the 'where it trades' row as gating every liquidity claim: dNVDA trades on Dinari order sessions (no permissionless DEX book on Base — an empty pool search is a finding, not an absence); the B20 live-pool set is session-derived through registry enumeration rather than a hardcoded count (the 2026-09-08 snapshot read 4 of 13); wtNVDA on thin DEX books",
+        "Reads absence as data — the B20-without-a-market set derived per session from registry enumeration (not a stale hardcoded count), dNVDA with no permissionless book — stating absences with dates rather than inferring liquidity that was not pulled",
         "Returns a weakest-link-per-goal verdict (weekend exit, dividend capture, custody documentation, permissionless entry each read a different row as the gate) and closes dated, research-not-advice"
       ],
       "files": [
@@ -390,6 +390,25 @@
       "files": [
         "references/issuer-comparison.md",
         "references/onchain-basis.md"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "build-surface-dev",
+      "should_trigger": true,
+      "prompt": "I'm a developer. What can I actually build on Base tokenized equity — what frameworks, tools, and schemes does Base provide, and what's still missing?",
+      "expected_output": "Maps the build surface in three layers from build-surface.md: rails (the B20 standard with its multiplier and policy-scope reads, the onchain registry, the custody chain, the data rails — with docs.base.org named as the documentation home), integration points (Aerodrome pools, Beefy vaults, the launchpads with their hook-permission read), and whitespace (the dated negatives — no strip venue, no lending market, no index product, the B20-without-a-pool set derived from the registry per session — each named with the rail it would sit on). Names rails and venues by address, not ticker; dates every negative; derives the token, pool, and vault counts from live enumeration (rule 9) instead of quoting a snapshot; distinguishes a tagline from a live venue; states what any build inherits (weekend gap, terms-only dividend, eligibility gating, issuer risk). Read-only: maps the surface, never scaffolds or deploys.",
+      "assertions": [
+        "Maps the three layers — rails, integration points, whitespace — rather than answering as a position question (no price, no yield)",
+        "Names the B20 standard's contract-level reads (multiplier, policy scopes) and the registry and custody chain, with docs.base.org as the documentation home",
+        "Names rails and venues by contract address (or the address source), never by ticker alone",
+        "Dates every negative (no strip venue, no lending market, no index product, the B20-without-a-pool set derived per session rather than a hardcoded count) and names the rail each would sit on",
+        "Distinguishes a tagline from a live venue (ecosystem partner pages vs verified contracts) rather than repeating announced support as live",
+        "States what a build inherits (weekend gap, terms-only dividend, eligibility gating, issuer risk) and stays read-only — no scaffolding, no deploy"
+      ],
+      "files": [
+        "references/build-surface.md",
+        "references/how-work.md"
       ]
     }
   ]
