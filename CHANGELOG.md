@@ -2,6 +2,15 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.2.2] — 2026-09-15
+
+Closes the two residual hardcoded counts the v1.2.1 count sweep left in `meme-pair-launchpad.md`. No new rubric, route, or operating rule — an audit pass.
+
+### Changed
+
+- **`meme-pair-launchpad.md` — the surface's last two static counts are gone.** The vanity-squat entry's "shared by all thirteen genuine B20 tokens" now reads "every genuine registry-verified B20 token (the count derives from the registry per session)". The wrapper-surface entry's "eleven 1:1-backed equities and ETFs (wtCOIN, …)" now reads "a set of 1:1-backed equities and ETFs (examples as of the 2026-09-07 enumeration: wtCOIN, wtNVDA, wtMSTR, wtSPCX, + wtSGOV/wtSKHY/wtSPYM/wtDRAM/wtQQQM/wtIAU/wtCEG — the family set is a session fact, re-enumerate per session)". Both now follow rule 9's doctrine (dated snapshot + derive instruction) that already governed the rest of the surface; the ST0x list is a dated example set, and the family count is derived per session, never quoted.
+- **Version bumped to 1.2.2** in SKILL.md frontmatter, manifest.json, and package.json (audit digit, per MAINTENANCE.md § Versioning).
+
 ## [1.2.1] — 2026-09-14
 
 Audit pass on the build surface: the derive-the-universe schema. No new rubric or route — a discipline change across the skill's surface, driven by the unit test (case 23 `build-surface-dev`) that caught the "4 of 13 in live pools" whitespace negative already stale six days after v1.2.0 shipped (Beefy then read 10 stock-USDC vaults). Supersedes hardcoded static counts with "state the anchor, derive the count."

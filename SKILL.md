@@ -2,7 +2,7 @@
 name: base-tokenizedstocks
 description: 'Tokenized stock analysis on Base: Dinari dShares, Coinbase B20 tokens (NVDAc, TSLAc, AAPLc, MSFTc), and legacy Backed bTokens. Answers ownership questions ("is bNVDA the same as owning NVDA"), dividends, PT/YT yield strips, corporate actions, custody and eligibility, index baskets, lending, and LP/vault yield. Pulls live state before any numeric claim. Not for TradFi-only equity, US tax/regulatory advice, or trade execution.'
 metadata:
-  version: 1.2.1
+  version: 1.2.2
   license: MIT
 ---
 
