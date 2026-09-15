@@ -2,6 +2,16 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.2.3] — 2026-09-15
+
+Terminology + README audit pass: the pack's narrative is normalized from "tokenized equity" to "tokenized stocks" everywhere it ships, and the README is simplified for a first-time reader. No new rubric, route, or operating rule — an audit pass.
+
+### Changed
+
+- **README.md rewritten for clarity.** Install instructions move to directly below the first description paragraph (they were buried under the file tree); sections condensed — the ten frameworks to one line each, honest scope trimmed to its load-bearing negatives. Narrative reads "tokenized stocks" throughout, matching the skill name.
+- **"Equity" swept out of the shipped surface.** 19 files: SKILL.md (frontmatter description, operating rules, scope boundaries), all 12 references and examples/assessment-example.md, MAINTENANCE.md, manifest.json, api-routes.json, evals/evals.json, the two sample-output archives, and package.json (description + keyword `tokenized-equity` → `tokenized-stocks`). Substitutions: "equity leg" → "stock leg", "Chainlink equity feeds" → "Chainlink stock price feeds", "onchain equity index" → "onchain stock index", "equity dividends" → "stock dividends". JSON files remain valid (`jq`-checked). CHANGELOG's own historical entries are untouched — the ledger is not falsified.
+- **Version bumped to 1.2.3** in SKILL.md frontmatter, manifest.json, and package.json (audit digit, per MAINTENANCE.md § Versioning).
+
 ## [1.2.2] — 2026-09-15
 
 Closes the two residual hardcoded counts the v1.2.1 count sweep left in `meme-pair-launchpad.md`. No new rubric, route, or operating rule — an audit pass.

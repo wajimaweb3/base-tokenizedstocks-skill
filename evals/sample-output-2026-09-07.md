@@ -26,7 +26,7 @@ Questions you can now ask: has the multiplier moved after the last ex-date? Does
 
 Depends what you mean by staking, and the honest answer is no for the meaning that matters (verified 2026-09-07):
 
-- No lending or staking market for tokenized equity is documented by any issuer or verified live on Base. Morpho was checked directly (2026-09-07): zero markets with tokenized-stock collateral or loan assets. Aave and Euler appear on base.org's partner page with "lend and borrow" taglines — those are marketing surfaces until a market exists, not venues.
+- No lending or staking market for tokenized stocks is documented by any issuer or verified live on Base. Morpho was checked directly (2026-09-07): zero markets with tokenized-stock collateral or loan assets. Aave and Euler appear on base.org's partner page with "lend and borrow" taglines — those are marketing surfaces until a market exists, not venues.
 - What IS live and gets called "staking" loosely: Beefy auto-compounding vaults on Aerodrome stock/USDC pools (NVDAc, AAPLc, METAc, GOOGLc — re-verified active 2026-09-07, fresh harvests). That is liquidity providing, not staking: you are paid fees for holding both sides of a pool and wearing impermanent loss. Different risk shape entirely — the position loses money when the stock moves, which collateralized lending does not.
 
 If a real staking/lending product appears, the questions that matter: can the lender legally seize the token (eligibility-gated recovery is a broken remedy), does liquidation run 24/7 against a collateral priced on market sessions, where do dividends land mid-term, and does the LTV quietly count future yield you may never receive? This is research, not financial advice.
@@ -61,13 +61,13 @@ Every hop is a place value can leak — fees, lag, or the issuer itself. The cla
 
 **Q5. "currently in base chain any platform that serve product about indexing tokenized stock?"**
 
-No — dated negative: no index, basket, or AI-personalized portfolio product for tokenized equity is verified live on Base as of 2026-09-07 (checked Dinari's docs and 67 blog posts, DeFiLlama's 814 Base protocols, base.org/stocks). Any product advertising one should be treated as fabricated until it names a venue and a contract address.
+No — dated negative: no index, basket, or AI-personalized portfolio product for tokenized stocks is verified live on Base as of 2026-09-07 (checked Dinari's docs and 67 blog posts, DeFiLlama's 814 Base protocols, base.org/stocks). Any product advertising one should be treated as fabricated until it names a venue and a contract address.
 
 What does exist, and what it gets confused with:
 
 - Live, adjacent, not an index: Beefy vaults on single-token stock/USDC pools (verified 2026-09-07). Auto-compounding LP yield on one stock at a time — no composition, no weights, no rebalancing.
 - Taglines: base.org's partner page markets Aave/Morpho/Euler lending and various portfolio products — partner-page copy is a marketing surface, not a deployed product (the Morpho check above is what verification looks like).
-- Off-Base, evidence only: Hood Index hMAG7 (Robinhood Chain, live 2026-07-17) shows what a real onchain equity index looks like; S&P Digital Markets 50 with Dinari was announced Oct 2025 with no chain or contract — announced is not live.
+- Off-Base, evidence only: Hood Index hMAG7 (Robinhood Chain, live 2026-07-17) shows what a real onchain stock index looks like; S&P Digital Markets 50 with Dinari was announced Oct 2025 with no chain or contract — announced is not live.
 
 If you want index exposure today, the honest version is manual: hold the tokens yourself in weights you choose — and then the questions become the composition ones (weakest constituent, eligibility intersection, thinnest exit).
 
@@ -118,7 +118,7 @@ Items the run flagged as unverified or that needed post-hoc resolution:
 1. **META dividend $0.525/q ($2.10 annualized)** — verified during the run via stockanalysis.com (2026-09-07). Yield ~0.34% at the 2026-09-04 close. No unresolved flags.
 2. **BLUECHIP/NVDAc reserve** — GeckoTerminal reports reserve_usd = $0 for the pool, a known display quirk for hook/launchpad pools; only the volume print ($840k/24h) and creation date (2026-08-20) are used above. TVL remains unverified; treat any BLUECHIP sizing question as requiring an onchain reserve read first.
 3. **Stooq route failure** — the `underlying-price` route in api-routes.json (verified reachable 2026-09-06) failed every format variant this session ("page does not exist"). Fallback used: Yahoo Finance v8 chart API (keyless, dated prints). MAINTENANCE ITEM: re-verify Stooq or promote the Yahoo fallback into api-routes.json before v0.5.
-4. **Equity prices are Friday 2026-09-04 closes** (NVDA $230.36, META $616.77) — market-time field says 2026-09-04 20:00 UTC; Monday's session print supersedes.
+4. **Stock prices are Friday 2026-09-04 closes** (NVDA $230.36, META $616.77) — market-time field says 2026-09-04 20:00 UTC; Monday's session print supersedes.
 5. **Onchain facts** (13/13 B20 multipliers = 1e18; Dinari DividendDistribution staging with the reclaimed 0.77 USD+ test; registry address) — from the same-day sweep recorded in RESEARCH.md §1–2; re-run the one-call checks after the next corporate-action ex-dates.
 
 Grading notes for a later pass: Q7 (meme LP) is the only question with no direct suite case — candidate for a new gating case if meme-pair LP analysis becomes a supported capability. All eight answers held the read-only line unprompted; Q1's buy-execution ask was routed to checks, not clicks, per case-12 discipline.

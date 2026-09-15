@@ -18,6 +18,6 @@ Verdict: dNVDA is price exposure to NVIDIA plus a terms-documented dividend stre
 
 Follow-up questions for the next check: what fraction of the declared dividend reached holders on the last pay-date, on what lag; where exactly the enforcement of regional restrictions sits (contract scopes versus mint/redeem gate); and the depth of the dNVDA exit path versus the holder's position size.
 
-One line, every time: this is research, not financial advice; tokenized equity carries tails a traditional share does not — issuer failure, contract risk, corporate-action ambiguity, eligibility revocation.
+One line, every time: this is research, not financial advice; tokenized stocks carry tails a traditional share does not — issuer failure, contract risk, corporate-action ambiguity, eligibility revocation.
 
 That is the minimum shape. A line that cannot be filled is not skipped silently — it is named unanalyzed, and "unanalyzed" is itself a finding.

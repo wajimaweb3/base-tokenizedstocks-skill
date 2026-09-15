@@ -26,14 +26,14 @@ Shape of the answer:
 
 1. Identify the asset in one line: what it is, who issues it, what claim layer it sits in.
 2. Walk the claim stack (from `claim-stack.md`): which rights pass through to this specific token, dated.
-3. Decompose total return: R_price + R_dividend + strip premium/discount, each leg dated. For a spot token (not a strip), the gap leg is the onchain basis against the underlying — compute it (token-price vs underlying-price, each leg stamped with its own timestamp and the equity leg's session state named) and walk the four-entry menu in `references/onchain-basis.md` before calling the gap a mispricing.
+3. Decompose total return: R_price + R_dividend + strip premium/discount, each leg dated. For a spot token (not a strip), the gap leg is the onchain basis against the underlying — compute it (token-price vs underlying-price, each leg stamped with its own timestamp and the stock leg's session state named) and walk the four-entry menu in `references/onchain-basis.md` before calling the gap a mispricing.
 4. If a strip, run the gap menu (from `yield-strip.md`): implied vs actual dividend, and which of the five entries explains the gap.
 5. Trace the custody and eligibility chain: who holds the underlying, how the dividend reaches the wallet, who is allowed to hold this at all.
 6. Classify any corporate-action assumption into the three evidence tiers, at both layers — underlying-level and issuer-level (`corporate-action.md`).
 7. Verdict in one paragraph, with the conditions it depends on (size, horizon, exit) and the invalidation triggers that would flip it.
 8. Close with the follow-up questions the user should carry into their next check.
 
-Every assessment carries a one-line disclaimer that this is research, not financial advice, and that tokenized equity carries tails the traditional share does not (issuer failure, contract risk, corporate-action ambiguity, eligibility revocation).
+Every assessment carries a one-line disclaimer that this is research, not financial advice, and that tokenized stocks carry tails the traditional share does not (issuer failure, contract risk, corporate-action ambiguity, eligibility revocation).
 
 ## Screen: scanning the universe for gaps
 
@@ -53,7 +53,7 @@ Every screen output states the survivorship problem: strips that failed, deliste
 
 For questions like "the dividend just changed — how does that hit my strip", "there is a corporate action coming, alert me", "why did the implied yield spike this week". The user already holds something and wants to know what changed. The failure mode is a wall of unchanged data; the fix is a diff, not a snapshot.
 
-The recurring event surface for a tokenized-equity position (for a multi-token portfolio it scales linearly in the number of constituents — the tracking burden is part of a composition's cost; see `index-composition.md`):
+The recurring event surface for a tokenized-stock position (for a multi-token portfolio it scales linearly in the number of constituents — the tracking burden is part of a composition's cost; see `index-composition.md`):
 
 1. Dividend calendar: announced amount, ex-date, pay-date; any change vs the last reading is a first-class event. For reinvesting tokens (xStocks), the arrival check is the multiplier activation log (multiplier-history route): a new entry dated ex-date+1 is the dividend landing onchain, and no entry after an ex-date that has already passed is itself a finding. For dShares on Base there is no activation log — the arrival check is the wallet itself: USD+ credited (or wrapped dShares added) after the pay-date, verified as a distribution transaction on Basescan, and its absence past the documented lag is a first-class finding. For Coinbase's B20 stocks the arrival check is the multiplier itself: one eth_call (multiplier(), WAD-scaled — anything above 1e18 is the dividend compounding in; the b20-multiplier route); all thirteen live tokens read exactly 1.0 as of 2026-09-07, so no B20 dividend has landed yet.
 2. Corporate actions: splits, mergers, spin-offs, special dividends, tender offers — pull from the underlying's filings, then cross-check against the issuer's response (or absence of one). The event menu and its evidence tiers live in `corporate-action.md`. Issuer-side detection gap worth knowing: Dinari documents no merger endpoint — a disappearing position is the programmatic signal, so reconcile positions and cash together.
@@ -73,7 +73,7 @@ Shape of the answer:
 
 ## Build: mapping the surface for a developer
 
-For questions like "what can I build on Base tokenized equity", "what frameworks, tools, or schemes does Base provide", "what launchpad details do I need before building", "what is the whitespace — what does not exist yet". The user is a developer asking about the surface, not a holder asking about a position. The failure mode is answering a build question as a position question (a price, a yield) or repeating an ecosystem tagline as a live venue.
+For questions like "what can I build on Base tokenized stocks", "what frameworks, tools, or schemes does Base provide", "what launchpad details do I need before building", "what is the whitespace — what does not exist yet". The user is a developer asking about the surface, not a holder asking about a position. The failure mode is answering a build question as a position question (a price, a yield) or repeating an ecosystem tagline as a live venue.
 
 Shape of the answer:
 
@@ -89,7 +89,7 @@ Shape of the answer:
 When any of the five modes is asked to deliver as a thread, comparison table, one-pager, or explainer for a specific audience, the rules that always apply:
 
 1. Never state or imply a future yield. Any dividend, implied yield, or return number is dated and marked variable.
-2. No "safe", "riskless", "guaranteed", "insured" — tokenized equity has issuer risk, contract risk, and corporate-action ambiguity that a share does not.
+2. No "safe", "riskless", "guaranteed", "insured" — tokenized stocks have issuer risk, contract risk, and corporate-action ambiguity that a share does not.
 3. Every superlative ("largest strip", "first tokenized dividend") carries a source and date, or it gets cut.
 4. Every named asset is identified on first mention (what it is, who issues it, what claim layer). No unexplained tickers.
 5. Format for scanning: tables for comparisons, labeled lines for calendars and decompositions, prose only where reasoning needs sentences. A wall of correct text loses to a table plus three sharp paragraphs.

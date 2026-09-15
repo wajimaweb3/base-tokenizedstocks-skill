@@ -1,6 +1,6 @@
-# Foundations: how to think about tokenized equity
+# Foundations: how to think about tokenized stocks
 
-The mental models the agent grounds on before answering any tokenized-equity question. Load once per session. These are the frameworks that stay true when specific issuers, tokens, and prices change.
+The mental models the agent grounds on before answering any tokenized-stock question. Load once per session. These are the frameworks that stay true when specific issuers, tokens, and prices change.
 
 ## 1. A tokenized stock is a claim stack, not a share
 
@@ -16,7 +16,7 @@ Price exposure passes through by construction (arbitrage anchors it). Dividend p
 
 ## 4. Yield stripping: PT is price, YT is dividend
 
-Stripping splits a tokenized share into two tokens that trade separately: PT (principal token) carries price exposure with no dividend claim; YT (yield token) carries the dividend stream with no principal claim. The onchain analog of PO/IO on bonds, applied to equity via the Pendle-style PT/YT contract. The identity PT + YT ≈ underlying holds when the strip is priced coherently; the residual is the strip premium or discount.
+Stripping splits a tokenized share into two tokens that trade separately: PT (principal token) carries price exposure with no dividend claim; YT (yield token) carries the dividend stream with no principal claim. The onchain analog of PO/IO on bonds, applied to stocks via the Pendle-style PT/YT contract. The identity PT + YT ≈ underlying holds when the strip is priced coherently; the residual is the strip premium or discount.
 
 ## 5. The implied forward dividend
 
@@ -34,7 +34,7 @@ Splits, mergers, special dividends, spin-offs — each redefines the underlying'
 - Terms-only — the contract promises a mechanism, but no live event has tested it.
 - Unknown — no source found; treat as an open risk and name it as such.
 
-The honest default when writing about corporate actions is terms-only or unknown, because most tokenized-equity issuers are young and most tickers have not lived through a hard event yet. The exceptions that prove the tiers: xStocks' reinvesting multiplier carries the class's only verified underlying-level dividend print, and Backed's acquisition by Kraken its only issuer-level one — both dated in corporate-action.md.
+The honest default when writing about corporate actions is terms-only or unknown, because most tokenized-stock issuers are young and most tickers have not lived through a hard event yet. The exceptions that prove the tiers: xStocks' reinvesting multiplier carries the class's only verified underlying-level dividend print, and Backed's acquisition by Kraken its only issuer-level one — both dated in corporate-action.md.
 
 Corporate actions also arrive at two layers: on the underlying (split, merger, dividend — the issuer processes the event and passes something through) and on the issuer itself (acquisition, pivot, product-line retirement — no pass-through mechanism exists; the outcome arrives as policy, and the one print in the class is Backed's acquisition by Kraken and pivot to xStocks). The event-by-event menu for both layers lives in corporate-action.md.
 
@@ -48,7 +48,7 @@ The skill answers, decomposes, and flags risk. It never signs transactions, move
 
 ## 10. Analogs: the TradFi Rosetta stone
 
-Tokenized equity is not new physics — it is TradFi primitives re-plumbed onchain. Reach for the analog before inventing a novel frame:
+Tokenized stocks are not new physics — it is TradFi primitives re-plumbed onchain. Reach for the analog before inventing a novel frame:
 
 - Tokenized share ↔ depositary receipt (ADR/GDR): a claim on a share held elsewhere, with pass-through defined by a deposit agreement.
 - PT/YT strip ↔ PO/IO strip on mortgage bonds, or coupon stripping on Treasuries.

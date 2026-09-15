@@ -2,7 +2,7 @@
 
 Maintainer-facing document (repo-level, like README; not loaded at runtime). Everything in this pack is dated, and dates expire. This file is the protocol for expiring gracefully.
 
-What makes this skill rot differently from most: its load-bearing facts are dated negatives. "No strip venue exists", "the B20 dividend mechanism has never fired", "no lending market for tokenized equity" — each of these flips on a single event, and a skill that keeps asserting a flipped negative is worse than no skill at all. Maintenance here is not housekeeping; it is re-checking the negatives before they lie.
+What makes this skill rot differently from most: its load-bearing facts are dated negatives. "No strip venue exists", "the B20 dividend mechanism has never fired", "no lending market for tokenized stocks" — each of these flips on a single event, and a skill that keeps asserting a flipped negative is worse than no skill at all. Maintenance here is not housekeeping; it is re-checking the negatives before they lie.
 
 ## The three clocks
 
@@ -16,7 +16,7 @@ What makes this skill rot differently from most: its load-bearing facts are date
    - B20 multipliers: one `eth_call` per live token (selector `0x1b3ed722`, expect exactly 1e18 on all tokens; the curl one-liner is in RESEARCH.md §1.4). Anything above 1e18 means a corporate action has finally fired — update corporate-action.md, claim-stack.md, how-work.md, the b20-multiplier route notes, README's dated claims, and file the print in RESEARCH.md.
    - Dinari DividendDistribution on Base (proxy `0x7978…01e`): lifetime transaction count still 5? A sixth transaction (`createDistribution`/`distribute`) means the pipe has moved off staging — same-day propagation as above.
    - base.org/stocks FAQ: does "How are dividends and splits handled?" now have a published answer? (As of 2026-09-07 the question ships with no answer.)
-   - Strip venue: any PT/YT product for tokenized equity on any chain. yield-strip.md stays forward-looking until one names a venue and a contract.
+   - Strip venue: any PT/YT product for tokenized stocks on any chain. yield-strip.md stays forward-looking until one names a venue and a contract.
    - Index/basket/AI-portfolio on Base (index-composition.md Part B), and lending markets with tokenized-stock collateral (Aave and Euler remain unverified taglines until checked; Morpho's negative dates from 2026-09-07).
    - Live layer drift: Beefy stock vaults still active, Aerodrome pool volumes re-pulled, new stock/meme pairs noted (BLUECHIP/NVDAc was the first, found 2026-09-07).
 2. **Route liveness:** hit every route in api-routes.json once and shape-check the response, not just the status code. The Stooq lesson is the canonical case: verified 2026-09-06, dead by 2026-09-07. Record the check date in the route's notes on every sweep.

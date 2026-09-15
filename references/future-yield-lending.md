@@ -1,8 +1,8 @@
-# Lending against tokenized equity: what breaks first
+# Lending against tokenized stocks: what breaks first
 
 Use this rubric when a user asks "can I borrow against my dNVDA", "should I take a loan against my dShares instead of selling", "what would my tokens collateralize", "can I be liquidated while the market is closed", "what is the collateral value of a YT". The trap to defuse first: borrowing against stock is a solved TradFi product — securities-based lending, where a custodian can deliver a share to anyone and the lender's worst case is a margin call. Borrowing against a tokenized stock is SBL where the collateral can refuse to transfer, the price can be stale by design, and the callable clause is replaced by an automated liquidation that never sleeps. Every layer between the wallet and the share is now a layer between the lender and recovery.
 
-No issuer documents a lending, margin, or collateral path for tokenized equity, and no protocol venue is verified live, as of 2026-09-07 — the Dinari doc index carries no such page and Hyperliquid's dShare integration is deployment, not collateral. This rubric is therefore forward-looking in full: the method for judging any venue the moment one appears, and the questions to put to it before quoting an LTV. Treat any "borrow against your dShares" product quoted today the way the strip rubric treats a quoted strip price: name the venue and the contract, or call it fabricated.
+No issuer documents a lending, margin, or collateral path for tokenized stocks, and no protocol venue is verified live, as of 2026-09-07 — the Dinari doc index carries no such page and Hyperliquid's dShare integration is deployment, not collateral. This rubric is therefore forward-looking in full: the method for judging any venue the moment one appears, and the questions to put to it before quoting an LTV. Treat any "borrow against your dShares" product quoted today the way the strip rubric treats a quoted strip price: name the venue and the contract, or call it fabricated.
 
 ## The menu: what breaks first (ranked)
 

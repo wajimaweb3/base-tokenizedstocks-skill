@@ -37,7 +37,7 @@ Basis = (231.97 / 230.36) − 1 = **+0.70%**. So yes, the token sits at a small 
 
 **Why the gap exists (ranked):**
 
-1. **It's a session gap, not a mispricing signal.** The last NVDA print is **Friday Sep 4 close**. Monday Sep 7 was the US Labor Day holiday, and when I pulled this (still Monday in the US, ~14:00 ET) no Tuesday session had opened. Since Sep 4 20:00Z, the NVDAc DEX book has been the **only live NVDA market for ~4 days**, repricing against a frozen equity anchor. That basis is flow-only information about a thin onchain book — it says nothing about where NVDA "should" be.
+1. **It's a session gap, not a mispricing signal.** The last NVDA print is **Friday Sep 4 close**. Monday Sep 7 was the US Labor Day holiday, and when I pulled this (still Monday in the US, ~14:00 ET) no Tuesday session had opened. Since Sep 4 20:00Z, the NVDAc DEX book has been the **only live NVDA market for ~4 days**, repricing against a frozen stock anchor. That basis is flow-only information about a thin onchain book — it says nothing about where NVDA "should" be.
 2. **The whole premium sits on a rounding error of a book.** NVDAc's live float is **13,731 tokens** against ~24.4 billion NVDA shares, on **$1.58M of total reserve**. The +0.70% is what a $1.58M pool charges to carry NVDA's weekend/holiday risk; quote it at size and it moves against you.
 3. **Nobody retail can cross it.** B20 mint and redeem are restricted to KYC'd Authorized Participants, so there's no permissionless restoration path — the premium can persist without being instantly arbed. That gate is *why* a "premium" exists at all.
 
@@ -55,7 +55,7 @@ Research, not financial advice. **Next questions you should carry:** re-read the
 4. `https://stockanalysis.com/stocks/nvda/` (fallback after Yahoo 429) — **close = $230.36, +$1.91 (+0.84%), "At close: Sep 4, 2026, 4:00 PM EDT", marketState = closed**. Fetched 2026-09-07T17:57:42Z.
 5. `https://mainnet.base.org` — POST eth_call `multiplier()` on NVDAc (`0x1b3ed722`) → **`0x…a7640000` = 1e18 = 1.0000 (no corporate action exercised)**. Fetched 2026-09-07T17:58:24Z.
 
-*(Note: the "stockanalysis" equity leg is a fallback source because Yahoo Finance returned 429 all session; its print matches the reference Friday close and the page's own "At close: Sep 4" label. Re-verify Yahoo on next use per the skill's liveness rule.)*
+*(Note: the "stockanalysis" stock leg is a fallback source because Yahoo Finance returned 429 all session; its print matches the reference Friday close and the page's own "At close: Sep 4" label. Re-verify Yahoo on next use per the skill's liveness rule.)*
 
 ### Grading — case 19 assertions
 
@@ -99,9 +99,9 @@ The tier row is the first finding: **you hold two promises that neither issuer h
 
 **Price fidelity — the live read (your "tracks better" question):**
 
-- **Underlying (both stacks):** NVDA last close **$230.36**, stamped *At close Sep 4, 2026, 4:00 PM EDT* = 2026-09-04T20:00Z (after-hours $229.47). The equity leg is **frozen** — Sep 5–7 weekend plus the Labor Day holiday (Sep 7). This is the anchor for any basis read.
+- **Underlying (both stacks):** NVDA last close **$230.36**, stamped *At close Sep 4, 2026, 4:00 PM EDT* = 2026-09-04T20:00Z (after-hours $229.47). The stock leg is **frozen** — Sep 5–7 weekend plus the Labor Day holiday (Sep 7). This is the anchor for any basis read.
 - **NVDAc:** **$231.72** @ 2026-09-07 17:59 UTC → basis **+0.59%** vs the frozen close.
-- **What that +0.59% is — and is not:** the equity leg has not printed for ~4 days while NVDAc traded continuously, so the gap is **flow-only information about the onchain book repricing against a stale anchor — not mispricing, and not evidence the token "runs rich."** Supporting signs: (1) the gap is drifting down within the hour — a pull ~30 min earlier in this same window read $232.01 (+0.71%); (2) the book is a rounding error against the share — $1.57M of NVDAc reserve vs a ~$5.6T NVDA market cap (13,731.08 tokens total float), so ordinary flow moves it; (3) nobody retail can cross the gap — mint/redeem is AP-only, so any persistent premium/discount is the priced cost of that gate.
+- **What that +0.59% is — and is not:** the stock leg has not printed for ~4 days while NVDAc traded continuously, so the gap is **flow-only information about the onchain book repricing against a stale anchor — not mispricing, and not evidence the token "runs rich."** Supporting signs: (1) the gap is drifting down within the hour — a pull ~30 min earlier in this same window read $232.01 (+0.71%); (2) the book is a rounding error against the share — $1.57M of NVDAc reserve vs a ~$5.6T NVDA market cap (13,731.08 tokens total float), so ordinary flow moves it; (3) nobody retail can cross the gap — mint/redeem is AP-only, so any persistent premium/discount is the priced cost of that gate.
 - **dNVDA:** **no keyless onchain print exists to measure.** Its price lives on Dinari's KYC order sessions (issuer price API not keyless-verified); GeckoTerminal finds **no dNVDA pool on Base** (the NVDA.D pools that do exist sit on Polygon/Monad at ~$0.50 reserve, zero volume). Absence is the finding: I cannot show you a dNVDA price or basis this session, so I will not assert one.
 
 **Verdict — weakest link per goal (there is no global winner):**
@@ -112,7 +112,7 @@ The tier row is the first finding: **you hold two promises that neither issuer h
 
 **The event to watch:** NVDA's next quarterly dividend goes **ex on 2026-09-10** (annualized $1.00, 0.43% yield → ~$0.25/q implied; read from the quote page 2026-09-07). It is the first ex-date that could produce a first print from either issuer on Base — a **B20 multiplier above 1.0** (NVDAc) or a **real USD+ distribution** (dNVDA) would flip that row from terms-only to verified print. Re-run the multiplier read after Sep 10.
 
-*Research, not financial advice. Tokenized equity carries issuer, contract, and corporate-action ambiguity the share itself does not.*
+*Research, not financial advice. Tokenized stocks carry issuer, contract, and corporate-action ambiguity the share itself does not.*
 
 **Questions to carry forward:** (1) Which goal dominates for you — a verifiable live track (NVDAc) or a particular dividend-in-kind preference (mechanism differs by issuer)? (2) Where do you actually hold each — dNVDA inside a Dinari account or as a token on Base? That changes what "holding" means here. (3) After the 2026-09-10 ex-date: did NVDAc's multiplier leave 1.0, and did Dinari's Base pipe distribute anything? Either is the test that upgrades a tier.
 
@@ -144,7 +144,7 @@ Reference-context facts cited in the answer (not fetched this session, from date
 
 ## Post-run notes
 
-- **Yahoo Finance returned HTTP 429 for both agents** all session; both fell back to stockanalysis.com cleanly and stamped the equity leg with the page's own "At close: Sep 4" label. This validates the fallback path documented in the `underlying-price` route notes and is itself a re-verification of the re-verify-on-first-use rule.
+- **Yahoo Finance returned HTTP 429 for both agents** all session; both fell back to stockanalysis.com cleanly and stamped the stock leg with the page's own "At close: Sep 4" label. This validates the fallback path documented in the `underlying-price` route notes and is itself a re-verification of the re-verify-on-first-use rule.
 - **Q2 found a live fact the rubric should consider absorbing**: NVDA's next quarterly dividend ex-date is **2026-09-10** (annualized $1.00, 0.43% yield). It is the first ex-date that could produce a Base-native print from either issuer — a B20 multiplier above 1.0 (NVDAc) or a real USD+ distribution (dNVDA). Worth adding to the track-mode checklist as the next dated re-check trigger; not a v0.10.0 blocker (the rubric already says "re-run after any ex-date").
 - **Both gaps (Q1 strip-premium, Q2 4/9-of-13) are agent-completeness, not skill-structural**: the rubrics carry the lines; the agents didn't quote them. The gate's bar is "does the skill enable the discipline in a cold reader" — both agents cleared it. No fix required for v0.10.0; noted for a future prose pass if the patterns recur.
 - **The dogfood loop for the analyst tier is closed**: two new capabilities → two new eval cases → two fresh-agent runs → both pass on structure. v0.10.0 ships.
@@ -172,7 +172,7 @@ The user proposed two questions an analyst would actually ask, chosen to stress 
 
 | Layer | TSLAc — Coinbase B20 | wtNVDA-type — ST0x wrapper |
 |---|---|---|
-| What it is / issuer | Native tokenized stock, Coinbase Onchain SPV Ltd (ADGM-supervised), on the Base B20 standard | "Wrapped <Name> ST0x" — a separate wrapper token over the same equity, BaseStonk-curated family |
+| What it is / issuer | Native tokenized stock, Coinbase Onchain SPV Ltd (ADGM-supervised), on the Base B20 standard | "Wrapped <Name> ST0x" — a separate wrapper token over the same stock, BaseStonk-curated family |
 | Legal claim | 1:1 beneficial claim on a real share held in regulated, bankruptcy-remote custody | 1:1-backed per wrapper docs; the claim runs to the wrapper's own backing, not to Coinbase's custody |
 | Custody chain | Named: **Alpaca**, regulated broker/custodian, bankruptcy-remote under ADGM; Coinbase SPV issues | Backing arrangement separate and not documented in this pack (unknown tier) — you hold a claim on the wrapper's claim |
 | Eligibility & where enforced | **ex-US only**, enforced at the **contract** via B20 policy scopes (transfer control, pause, supply caps) | Per wrapper terms; trades freely against memes on Base launchpads — enforcement surface differs from B20 |
@@ -201,7 +201,7 @@ The user proposed two questions an analyst would actually ask, chosen to stress 
 6. **GET https://query1.finance.yahoo.com/v8/finance/chart/TSLA?interval=1d&range=5d** (browser UA) → **HTTP 429** (rate-limited, no body). Retry on **query2.finance.yahoo.com** → HTTP 429 again. No TSLA underlying print obtained this session; none quoted. Timestamp 2026-09-08.
 7. *(No-data fetches, logged for completeness:)* `https://api.geckoterminal.com/api/v2/search/tokens?...` returned Rails 404 for both wtTSLA and TSLAc — the token-search path is not a live GeckoTerminal route, so no existence read taken from it. Timestamp 2026-09-08.
 
-Note on the calendar: the project session date is 2026-09-08; the onchain/API reads above timestamp at ~UTC 19:00–19:08 on 2026-09-07. The underlying equity quote is absent (pull failed), so no basis or price-fidelity number is asserted — only the structural read that TSLAc has no live onchain book to measure one against.
+Note on the calendar: the project session date is 2026-09-08; the onchain/API reads above timestamp at ~UTC 19:00–19:08 on 2026-09-07. The underlying stock quote is absent (pull failed), so no basis or price-fidelity number is asserted — only the structural read that TSLAc has no live onchain book to measure one against.
 
 #### Grading — Q1 against the rubric's core disciplines
 
@@ -229,7 +229,7 @@ I'm answering on the canonical case: **NVDA**, which on Base exists as three sep
 ### Why prices and liquidity differ between versions
 
 1. **N different claim stacks, not N venues for one instrument.** Unlike an ADR listed on two exchanges (same deposit agreement), these are different *issuers* with different custody (Alpaca vs the ST0x wrapper's backing vs Dinari in-house), different dividend mechanisms, different eligibility. A gap between versions can encode a real claim difference, not just microstructure. That's why the onchain-basis rubric reads it as a "basis," never a verdict.
-2. **Two clocks.** Onchain books tick 24/7; the equity leg froze at the US Friday close (Mon 2026-09-07 was Labor Day, market closed). Any divergence right now is flow against a frozen anchor — information about each book, not about NVDA.
+2. **Two clocks.** Onchain books tick 24/7; the stock leg froze at the US Friday close (Mon 2026-09-07 was Labor Day, market closed). Any divergence right now is flow against a frozen anchor — information about each book, not about NVDA.
 3. **Liquidity fragmentation.** Depth decides how far a gap can move and how long it persists.
 
 ### Live worked set — NVDA's Base surface, pulled 2026-09-07 ~19:08Z (local 2026-09-08)
@@ -266,7 +266,7 @@ Spreads as of the same instant: **wtNVDA is −0.60% vs NVDAc** ($231.43/$232.83
 
 **Top risk:** buying the cheap version and discovering you cannot exit at the price you saw — thin-book quotes are stale or one-sided, and the arb that would rescue you (mint/redeem) is gated to APs/KYC'd parties.
 
-Research, not financial advice. Tokenized equity carries tails a share does not: issuer failure, contract risk, corporate-action ambiguity, eligibility revocation.
+Research, not financial advice. Tokenized stocks carry tails a share does not: issuer failure, contract risk, corporate-action ambiguity, eligibility revocation.
 
 **Questions to carry forward:** Which NVDA version's claim (custody, dividend mechanism, eligibility) do you actually want — and at what size, does it even fit NVDAc's deep book or are you proposing to trade into wtNVDA's $14k? If you're watching the spread as a signal, which leg of the four-entry basis menu (session gap, depth/float, arb-access, stacked wrapper legs) do you think moved when it drifts?
 
@@ -276,7 +276,7 @@ Research, not financial advice. Tokenized equity carries tails a share does not:
 2. **base.org/stocks registry (address book)** — GET `https://www.base.org/stocks` (followed redirect from base.org) → resolved NVDAc contract **0xb20000000000000000000078ee7ce2fE4908108C** (10 distinct 0xb200-prefixed B20 addresses on page) — fetched 2026-09-07T19:08:10Z.
 3. **GeckoTerminal token endpoint — NVDAc** — GET `https://api.geckoterminal.com/api/v2/networks/base/tokens/0xb20000000000000000000078ee7ce2fE4908108C` → name "NVIDIA Corporation", symbol NVDAc, price_usd **$232.83**, total_reserve_in_usd **1,513,868.87**, normalized_total_supply **13,731.08** — fetched 2026-09-07T19:08:25Z.
 4. **GeckoTerminal pools — NVDAc** — GET `https://api.geckoterminal.com/api/v2/networks/base/tokens/0xb20000000000000000000078ee7ce2fE4908108C/pools?page=1` → 20 pools, no next page; read NVDAc/USDC 0.103% reserve **$2,517,111** / vol24 **$3,672,893** / ~$231.06; NVDAc/USDC 0.99% ~$228.97 (reserve $296,929); NVDAc/USDC 3% ~$228.51 (reserve $69,397); NVDAc/KAI 1% ~$214.99 (reserve $20,901) — fetched 2026-09-07T19:08:47Z.
-5. **Yahoo Finance — NVDA underlying** — GET `https://query1.finance.yahoo.com/v8/finance/chart/NVDA?interval=1d&range=5d` (and query2 host) → **no value returned**; every attempt across 2026-09-07T19:07:01Z–19:12:00Z returned HTTP 429 (rate-limited). Equity anchor therefore carried from the skill's reference layer (itself a live Yahoo pull recorded 2026-09-08): NVDA **$230.36**, last close 2026-09-04T20:00Z, market closed (Labor Day) so no newer print exists at fetch time.
+5. **Yahoo Finance — NVDA underlying** — GET `https://query1.finance.yahoo.com/v8/finance/chart/NVDA?interval=1d&range=5d` (and query2 host) → **no value returned**; every attempt across 2026-09-07T19:07:01Z–19:12:00Z returned HTTP 429 (rate-limited). The stock anchor therefore carried from the skill's reference layer (itself a live Yahoo pull recorded 2026-09-08): NVDA **$230.36**, last close 2026-09-04T20:00Z, market closed (Labor Day) so no newer print exists at fetch time.
 
 #### Grading — Q2 against the rubric's core disciplines
 

@@ -47,7 +47,7 @@ The question this genre actually gets asked — "which memes paired with NVDA ar
 
 ## The claim-stack twist
 
-This is the part an ordinary memecoin analysis misses: a meme/stock pair embeds an equity claim stack inside a memecoin trade. The meme leg runs on a minutes clock; the stock leg runs on market sessions, depegs on weekends when its underlying does not print, carries an issuer whose dividend pipe is terms-only (all B20 multipliers 1.0 as of the 2026-09-07 sweep), and can be halted by issuer policy. The LP in a meme/stock pool is short options on the pair spread of *those two specific legs* — not "a memecoin with extra steps" but a position whose safe asset is only relatively safe. Weekend gap is the amplifier: the meme leg trades Saturday night against a stock leg whose last confirmed print was Friday's close.
+This is the part an ordinary memecoin analysis misses: a meme/stock pair embeds a stock claim stack inside a memecoin trade. The meme leg runs on a minutes clock; the stock leg runs on market sessions, depegs on weekends when its underlying does not print, carries an issuer whose dividend pipe is terms-only (all B20 multipliers 1.0 as of the 2026-09-07 sweep), and can be halted by issuer policy. The LP in a meme/stock pool is short options on the pair spread of *those two specific legs* — not "a memecoin with extra steps" but a position whose safe asset is only relatively safe. Weekend gap is the amplifier: the meme leg trades Saturday night against a stock leg whose last confirmed print was Friday's close.
 
 ## The lifecycle and the swarm
 

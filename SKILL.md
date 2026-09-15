@@ -1,18 +1,18 @@
 ---
 name: base-tokenizedstocks
-description: 'Tokenized stock analysis on Base: Dinari dShares, Coinbase B20 tokens (NVDAc, TSLAc, AAPLc, MSFTc), and legacy Backed bTokens. Answers ownership questions ("is bNVDA the same as owning NVDA"), dividends, PT/YT yield strips, corporate actions, custody and eligibility, index baskets, lending, and LP/vault yield. Pulls live state before any numeric claim. Not for TradFi-only equity, US tax/regulatory advice, or trade execution.'
+description: 'Tokenized stock analysis on Base: Dinari dShares, Coinbase B20 tokens (NVDAc, TSLAc, AAPLc, MSFTc), and legacy Backed bTokens. Answers ownership questions ("is bNVDA the same as owning NVDA"), dividends, PT/YT yield strips, corporate actions, custody and eligibility, index baskets, lending, and LP/vault yield. Pulls live state before any numeric claim. Not for TradFi-only stock analysis, US tax/regulatory advice, or trade execution.'
 metadata:
-  version: 1.2.2
+  version: 1.2.3
   license: MIT
 ---
 
 # Base - Tokenized Stock
 
-This skill teaches an agent two things: the frameworks that stay true for tokenized equity as issuers and tickers change (claim stacks, pass-through hierarchies, PT/YT decomposition, two-layer corporate-action analysis, index composition, lending against claim stacks, dated evidence tiers), and the discipline of pulling live data before asserting anything numeric — prices, dividends, eligibility rules, and issuer terms all move faster than any static document. Dated figures in these files are worked examples to re-verify, not current truth.
+This skill teaches an agent two things: the frameworks that stay true for tokenized stocks as issuers and tickers change (claim stacks, pass-through hierarchies, PT/YT decomposition, two-layer corporate-action analysis, index composition, lending against claim stacks, dated evidence tiers), and the discipline of pulling live data before asserting anything numeric — prices, dividends, eligibility rules, and issuer terms all move faster than any static document. Dated figures in these files are worked examples to re-verify, not current truth.
 
 ## The operating rules
 
-Every rule below traces to a failure mode that keeps repeating in tokenized-equity analysis: agents describe a token as if the wallet held the share, quote a return that quietly fuses price and dividend, assert a split or merger outcome that no live event has tested, and treat an issuer's terms-only promise as if it were verified behavior. The rules exist to make those failures loud.
+Every rule below traces to a failure mode that keeps repeating in tokenized-stock analysis: agents describe a token as if the wallet held the share, quote a return that quietly fuses price and dividend, assert a split or merger outcome that no live event has tested, and treat an issuer's terms-only promise as if it were verified behavior. The rules exist to make those failures loud.
 
 1. Date every number. Prices, dividends, yields, eligibility rules, custody arrangements, and issuer fees all carry an as-of date pulled from a live source this session. A number without a date is folklore.
 2. Decompose total return before judging any position. R_total = R_price + R_dividend + strip premium/discount, each leg dated separately. A single "return" figure that fuses price move and dividend is not information; a "yield" figure that hides fees and pass-through lag is worse.
@@ -33,7 +33,7 @@ Every rule below traces to a failure mode that keeps repeating in tokenized-equi
 
 ## Scope boundaries
 
-This skill covers tokenized equity on Base and the primitives directly built on it (strips, dividend rights, onchain corporate actions, custody chains). It does NOT cover: tokenized equity on other chains as a subject — off-Base names (xStocks, Ondo Stocks) appear only as evidence anchors for what a mechanism or a print looks like, never as venues to analyze or recommend; TradFi-only equity analysis (use a fundamentals skill); US-specific regulatory or tax advice (provide factual context, point to counsel); transaction construction or execution (read-only, always); or general crypto market structure beyond what touches tokenized equity (defer to a DeFi-native skill for lending, perps, options, or stablecoin questions unless they interact with a strip or share directly).
+This skill covers tokenized stocks on Base and the primitives directly built on it (strips, dividend rights, onchain corporate actions, custody chains). It does NOT cover: tokenized stocks on other chains as a subject — off-Base names (xStocks, Ondo Stocks) appear only as evidence anchors for what a mechanism or a print looks like, never as venues to analyze or recommend; TradFi-only stock analysis (use a fundamentals skill); US-specific regulatory or tax advice (provide factual context, point to counsel); transaction construction or execution (read-only, always); or general crypto market structure beyond what touches tokenized stocks (defer to a DeFi-native skill for lending, perps, options, or stablecoin questions unless they interact with a strip or share directly).
 
 ## What "Base - Tokenized Stock" means, in one worked case
 

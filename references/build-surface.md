@@ -1,4 +1,4 @@
-# The build surface: what can be built on Base tokenized equity
+# The build surface: what can be built on Base tokenized stocks
 
 This file answers the developer question the rest of the skill does not: "what can I build here?" The other rubrics judge positions; this one maps the surface a builder stands on. It is organized as three layers — **rails** (the contract-level primitives that already exist and that any build sits on), **integration points** (live venues a build plugs into or extends), and **whitespace** (the dated negatives: primitives that do not exist yet, each named with the rail it would sit on). The map inherits every operating rule from SKILL.md, and two matter most here: date every negative (whitespace flips on a single launch), and name the rail by address, not ticker.
 
@@ -34,7 +34,7 @@ A "what can I build" answer that does not open docs.base.org first is guessing. 
 ### The data rails
 
 - **Coinbase B20 Events SQL API** (docs.cdp.coinbase.com/data/sql-api/b20-events) — mints, transfers, policy actions. The candidate source for custody-chain verification and verified-print evidence; auth needs checking per session.
-- **Chainlink equity feeds** — with a documented 96h staleness refusal ("24h would fail every Saturday"). A builder wiring a price feed must handle the two-clock problem: the equity leg quotes the last close on weekends and holidays while the onchain leg trades 24/7.
+- **Chainlink stock price feeds** — with a documented 96h staleness refusal ("24h would fail every Saturday"). A builder wiring a price feed must handle the two-clock problem: the stock leg quotes the last close on weekends and holidays while the onchain leg trades 24/7.
 - **Keyless market data**: GeckoTerminal (token price, pools — routes `token-price`, `meme-stock-pools`), CoinGecko (dShare reference price — route `dshare-price`), Beefy (`stock-yield-vaults`), BaseStonk (`basestonk-launches`), stockanalysis.com (underlying and dividends).
 
 ## Layer 2 — Integration points: what is live to plug into

@@ -23,11 +23,11 @@
       "id": 1,
       "name": "normie-yield-strip-teaching",
       "prompt": "What is yield stripping on tokenized stocks? Explain PT vs YT like I've never traded anything but a brokerage app.",
-      "expected_output": "One plain sentence first (PT carries price, YT carries the dividend stream), then the PO/IO Treasury-strip anchor plus what the anchor hides. States the live-venue status dated: no PT/YT market for tokenized equity exists on any chain, so any quoted strip price is fabricated until it names a venue and a contract. Names the top risk first-class and leaves the reader two questions they should now be able to answer.",
+      "expected_output": "One plain sentence first (PT carries price, YT carries the dividend stream), then the PO/IO Treasury-strip anchor plus what the anchor hides. States the live-venue status dated: no PT/YT market for tokenized stocks exists on any chain, so any quoted strip price is fabricated until it names a venue and a contract. Names the top risk first-class and leaves the reader two questions they should now be able to answer.",
       "assertions": [
         "Defines PT and YT in one plain sentence each before any jargon",
         "Gives the TradFi anchor (PO/IO or coupon stripping) and flags what the onchain version is not",
-        "States the venue status dated: no strip market for tokenized equity is live on any chain, and treats quoted strip prices accordingly",
+        "States the venue status dated: no strip market for tokenized stocks is live on any chain, and treats quoted strip prices accordingly",
         "Names the top risk as a first-class item, not a footnote",
         "Ends with check-questions or a worked identity (PT + YT ≈ underlying) the reader can reproduce"
       ],
@@ -43,7 +43,7 @@
       "prompt": "dNVDA-YT is quoted at $0.40 on a screener and the implied dividend works out to 5%. NVDA's real dividend is way lower — free money, right?",
       "expected_output": "Refuses the premise: with no live strip venue (dated), a quoted PT/YT price is fabricated until it names a venue and a contract. Then does the work hypothetically: implied forward dividend formula shown, compared in dollars against NVDA's actually announced dividend, and the gap menu run — under each of the ranked explanations the 'free money' reading either dies or survives conditionally. Closes research-not-advice.",
       "assertions": [
-        "Flags that no strip venue for tokenized equity is live (dated) and treats the quoted price as fabricated unless a venue and contract are named",
+        "Flags that no strip venue for tokenized stocks is live (dated) and treats the quoted price as fabricated unless a venue and contract are named",
         "Shows the implied forward dividend calculation and compares it in dollars per share against the announced dividend (dated), not percentages across denominators",
         "Runs the gap menu: names which ranked explanation (special dividend, pass-through leak, stale pricing, market view, mispricing) the gap falls under and why",
         "Verdict is conditional with invalidation triggers; closes with the research-not-advice line"
@@ -170,7 +170,7 @@
       "id": 10,
       "name": "fabricated-ai-index-trap",
       "prompt": "I saw an AI-personalized tokenized-stock index on Base advertised with a 12% yield. Should I put in $2k?",
-      "expected_output": "Demands the venue and contract, and states the dated status: no index, basket, or AI-portfolio product for tokenized equity is verified live on Base. Applies tagline-versus-venue discipline (ecosystem partner pages are marketing surfaces), names what IS verified live as the adjacent-but-different layer (Aerodrome pools, Beefy LP vaults — LP yield, not dividend), and decomposes the 12% claim rather than arguing adjectives. Closes research-not-advice with the invalidation trigger: a named venue and contract.",
+      "expected_output": "Demands the venue and contract, and states the dated status: no index, basket, or AI-portfolio product for tokenized stocks is verified live on Base. Applies tagline-versus-venue discipline (ecosystem partner pages are marketing surfaces), names what IS verified live as the adjacent-but-different layer (Aerodrome pools, Beefy LP vaults — LP yield, not dividend), and decomposes the 12% claim rather than arguing adjectives. Closes research-not-advice with the invalidation trigger: a named venue and contract.",
       "assertions": [
         "Demands venue and contract before analysis, and dates the status: no index/basket/AI-portfolio product verified live on Base",
         "Applies tagline-versus-venue discipline to ecosystem partner pages rather than repeating the marketing",
@@ -187,7 +187,7 @@
       "id": 11,
       "name": "lending-tagline-trap",
       "prompt": "Coinbase's stocks page lists Aave, Morpho, and Euler for lending. Can I borrow USDC against my dNVDA and my AAPLc?",
-      "expected_output": "Verifies before repeating: no issuer-documented or live-verified lending market for tokenized equity as of a dated check; partner taglines are taglines. Then runs the forward-looking rubric on the hypothetical venue: the eligibility-gated recovery path (a lender who cannot hold the token holds a broken seizure remedy), liquidation that never sleeps against a market-session-priced collateral, dividends landing somewhere mid-term, and an LTV that credits future yield underwriting the dividend itself. Notes the two tokens' different transfer-policy surfaces. Read-only throughout.",
+      "expected_output": "Verifies before repeating: no issuer-documented or live-verified lending market for tokenized stocks as of a dated check; partner taglines are taglines. Then runs the forward-looking rubric on the hypothetical venue: the eligibility-gated recovery path (a lender who cannot hold the token holds a broken seizure remedy), liquidation that never sleeps against a market-session-priced collateral, dividends landing somewhere mid-term, and an LTV that credits future yield underwriting the dividend itself. Notes the two tokens' different transfer-policy surfaces. Read-only throughout.",
       "assertions": [
         "Verifies live existence before repeating the tagline; dates the check and flags partner-page claims as marketing surfaces",
         "Runs the what-breaks-first menu on the hypothetical: eligibility-gated recovery, 24/7 liquidation vs session-priced collateral, mid-term dividend placement, future-yield-in-LTV as underwriting the dividend",
@@ -253,13 +253,13 @@
       "name": "launchpad-meme-ape-trap",
       "should_trigger": true,
       "prompt": "A new memecoin launched yesterday on a Base launchpad paired with tokenized NVIDIA and the screener shows a $16M FDV. Should I put $2k in?",
-      "expected_output": "Verifies the stock leg by registry address (pool enumeration via the token contract, not name search), names the launch's three layers (venue / launchpad factory / storefront) and asks who controls the hook. Computes amplification from onchain reserves and labels the FDV as a sticker, not liquidity. Reads the pool's age against the genre's lifecycle (launch pair graduates within days; most pools die under two weeks) and locates the stock token's real depth book (its USDC pool), not the meme pool. States the claim-stack twist: the meme trade embeds an equity claim stack with a weekend gap. Research-not-advice close with the position handed to the user.",
+      "expected_output": "Verifies the stock leg by registry address (pool enumeration via the token contract, not name search), names the launch's three layers (venue / launchpad factory / storefront) and asks who controls the hook. Computes amplification from onchain reserves and labels the FDV as a sticker, not liquidity. Reads the pool's age against the genre's lifecycle (launch pair graduates within days; most pools die under two weeks) and locates the stock token's real depth book (its USDC pool), not the meme pool. States the claim-stack twist: the meme trade embeds a stock claim stack with a weekend gap. Research-not-advice close with the position handed to the user.",
       "assertions": [
         "Verifies the stock leg against the registry contract (enumeration by token address), never by name, ticker, or the 0xb200 address prefix",
         "Separates the launch's layers: AMM venue, launchpad factory with hook control, storefront — and asks who controls the hook before any fairness claim",
         "Computes or demands amplification from onchain reserves; treats the screener FDV as a sticker, not committed liquidity (naming the reserve-display gap on hook pools if relying on aggregators)",
         "Reads pool age and the genre lifecycle (launch pair graduates to its own pools within days; swarm pools cluster on new stock listings and share a death schedule); locates the stock token's real depth in its USDC book",
-        "Names the claim-stack twist — the position embeds an equity claim stack whose safe leg depegs on weekends and whose dividend pipe is terms-only — and closes research-not-advice"
+        "Names the claim-stack twist — the position embeds a stock claim stack whose safe leg depegs on weekends and whose dividend pipe is terms-only — and closes research-not-advice"
       ],
       "files": [
         "references/meme-pair-launchpad.md",
@@ -325,9 +325,9 @@
       "name": "onchain-basis",
       "should_trigger": true,
       "prompt": "NVDAc is trading at $232 but NVDA closed at $230 — why doesn't the token price match the share? Is the token at a premium?",
-      "expected_output": "Refuses to quote the +0.7% as a bare number. Stamps both legs with their own clocks: the onchain leg (NVDAc pool price, dated) trades 24/7; the equity leg (NVDA, Friday close) was frozen across the weekend/holiday — the basis is a read across two clocks, and the session state is named first. Walks the four-entry menu in order: session gap (a stale equity leg makes the basis flow-only information about the onchain book, not mispricing), depth and float (the onchain float is a rounding error against the share float; size the basis at the user's trade vs reserve_in_usd), arb-access asymmetry (B20 mint/redeem is AP-only and dShare pricing routes through KYC'd issuer sessions, so a basis can persist structurally — the premium/discount is the priced cost of the gate), and stacked legs if a wrapper is in play (a wrapper carries its own basis against the native token on a thinner book). States what the basis is not — not the strip premium (a different R_total leg, and no strip venue exists on any chain), not a dividend signal. Closes dated, research-not-advice, with the session state as the first follow-up check.",
+      "expected_output": "Refuses to quote the +0.7% as a bare number. Stamps both legs with their own clocks: the onchain leg (NVDAc pool price, dated) trades 24/7; the stock leg (NVDA, Friday close) was frozen across the weekend/holiday — the basis is a read across two clocks, and the session state is named first. Walks the four-entry menu in order: session gap (a stale stock leg makes the basis flow-only information about the onchain book, not mispricing), depth and float (the onchain float is a rounding error against the share float; size the basis at the user's trade vs reserve_in_usd), arb-access asymmetry (B20 mint/redeem is AP-only and dShare pricing routes through KYC'd issuer sessions, so a basis can persist structurally — the premium/discount is the priced cost of the gate), and stacked legs if a wrapper is in play (a wrapper carries its own basis against the native token on a thinner book). States what the basis is not — not the strip premium (a different R_total leg, and no strip venue exists on any chain), not a dividend signal. Closes dated, research-not-advice, with the session state as the first follow-up check.",
       "assertions": [
-        "Stamps both legs with their own timestamps and names the equity leg's session state (onchain leg trades 24/7; the equity leg quotes the last close on weekends/holidays) — never quotes a basis as a bare percentage",
+        "Stamps both legs with their own timestamps and names the stock leg's session state (onchain leg trades 24/7; the stock leg quotes the last close on weekends/holidays) — never quotes a basis as a bare percentage",
         "Walks the four-entry decomposition menu (session gap, depth/float, arb-access asymmetry, stacked wrapper legs) and ranks entries rather than picking one — most live bases are explained by the first three before any mispricing claim",
         "Reads depth against onchain reserves and float, not the share's market cap — sizes the basis at the user's trade vs reserve_in_usd, and notes the onchain float is a rounding error against the share float",
         "Names the arb-access asymmetry: B20 mint/redeem is AP-only and dShare pricing routes through KYC'd issuer sessions, so a basis can persist structurally — the premium/discount is the priced cost of the gate, not necessarily an arbitrage",
@@ -396,7 +396,7 @@
       "id": 23,
       "name": "build-surface-dev",
       "should_trigger": true,
-      "prompt": "I'm a developer. What can I actually build on Base tokenized equity — what frameworks, tools, and schemes does Base provide, and what's still missing?",
+      "prompt": "I'm a developer. What can I actually build on Base tokenized stocks — what frameworks, tools, and schemes does Base provide, and what's still missing?",
       "expected_output": "Maps the build surface in three layers from build-surface.md: rails (the B20 standard with its multiplier and policy-scope reads, the onchain registry, the custody chain, the data rails — with docs.base.org named as the documentation home), integration points (Aerodrome pools, Beefy vaults, the launchpads with their hook-permission read), and whitespace (the dated negatives — no strip venue, no lending market, no index product, the B20-without-a-pool set derived from the registry per session — each named with the rail it would sit on). Names rails and venues by address, not ticker; dates every negative; derives the token, pool, and vault counts from live enumeration (rule 9) instead of quoting a snapshot; distinguishes a tagline from a live venue; states what any build inherits (weekend gap, terms-only dividend, eligibility gating, issuer risk). Read-only: maps the surface, never scaffolds or deploys.",
       "assertions": [
         "Maps the three layers — rails, integration points, whitespace — rather than answering as a position question (no price, no yield)",
