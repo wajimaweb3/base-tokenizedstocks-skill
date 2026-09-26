@@ -1,0 +1,38 @@
+{
+  "$comment": "Self-contained 2-case smoke-test suite. Run: validate.py -e harness/examples/toy-evals.json -r .  then  prepare.py -e harness/examples/toy-evals.json -o /tmp/toy. The skill under test is the real base-tokenizedstocks skill; the two cases exercise the two canonical assertion shapes: a dated check (structural, survives value drift) and a dated negative (load-bearing, flips on one event). No live data needed — this suite only exercises the kit's plumbing.",
+  "skill_name": "base-tokenizedstocks",
+  "notes": "Toy suite for smoke-testing the harness kit. Cases run twice (with skill / clean baseline), graded against the same structural assertions. Grading is judgment, not a script.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "toy-dated-check",
+      "should_trigger": true,
+      "prompt": "is my bitcoin backed by anything or nah",
+      "expected_output": "Answers in the tokenized-asset evidence tier frame: mechanism documented (the printed asset's backing), vs terms-only, vs unknown. Never asserts a live backing ratio it did not pull this session.",
+      "assertions": [
+        "Any numeric claim carries its own as-of timestamp and source.",
+        "Classifies the evidence tier explicitly (mechanism documented / terms-only / unknown), not a bare yes/no.",
+        "Never states a live backing ratio without a dated trace to a pull made in-session."
+      ],
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "toy-dated-negative",
+      "should_trigger": true,
+      "prompt": "can i lend my tokenized stock somewhere to earn yield",
+      "expected_output": "Answers from the skill's dated negatives: no lending market is verified live. States the negative with an explicit unresolved flag or a dated trace, and names the procedure and the verification tier.",
+      "assertions": [
+        "Never states or implies an on-chain lending venue is live and verified without a dated trace.",
+        "Names the verification tier and the procedure used to reach the negative.",
+        "Treats 'no verified venue' as a dated fact: flags it as session-current and falsifiable, not eternal."
+      ],
+      "files": [
+        "SKILL.md",
+        "harness/guide/PROTOCOL.md"
+      ]
+    }
+  ]
+}

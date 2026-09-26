@@ -2,6 +2,21 @@
 
 All notable changes to this skill pack are documented here. The format follows the project's versioning scheme `v[major].[feature].[audit]` (see MAINTENANCE.md § Versioning). Pre-v1.0.0 history is preserved in RESEARCH.md's `Output v0.x.y` markers; this changelog begins at the first stable baseline.
 
+## [1.3.0] — 2026-09-26
+
+**Feature: the eval harness kit ships** — the paired-run protocol (`evals/evals.json`, the suite whose every case runs twice against the same structural assertions) is packaged as a reusable, installable, keyless kit other skill authors can point at their own domain skills. `harness/` lives in the repo as a developer tool and stays *out* of the shipped pack (`package.json` `files` unchanged). The kit is the method, tooled: `scripts/validate.py | prepare.py | report.py`, a JSON Schema, a transferable PROTOCOL guide, and a 2-case toy suite for smoke-testing standalone. Fresh proof under current conditions: the kit dogfoods on its own suite — the selected 8-case paired run is archived as `evals/sample-output-2026-09-26.md`.
+
+### Added
+
+- **`harness/` — the eval harness kit.** Seven files: `README.md` (what it is + quickstart), `schema/evals.schema.json` (the suite shape), `scripts/validate.py` (evals.json → structural rule check, exit 0/1), `scripts/prepare.py` (suite → task pack + blank grading worksheet), `scripts/report.py` (filled worksheet → the archived delta table), `guide/PROTOCOL.md` (the transferable method: what is proven, case/assertion design, paired run, grading-is-judgment, dated archiving, capability gating, fairness caveats), and `examples/` (2-case toy fixture + pointer to the 24-case reference suite). stdlib-only python3, no API keys — grading stays human/agent judgment.
+- **`evals/sample-output-2026-09-26.md` — fresh paired-run proof** produced with the kit under current live conditions. 8 cases across all five task modes (0, 2, 3, 6, 12, 15, 22, 23), live state pulled this session (B20 multiplier sweep, dNVDA/NVDAc/dTVL prices, NVDA close), graded per-assertion with the delta table rendered by `report.py`, plus fairness caveats and a post-run verification note.
+
+### Changed
+
+- **README.md case count corrected.** "21 cases spanning all four task modes" → "24 cases spanning all five task modes" (the build task mode and its 3-cases landed at v1.2.0; the count and mode list had drifted). Structure tree updated to match.
+- **Version bumped to 1.3.0** in SKILL.md frontmatter, manifest.json, and package.json (feature digit, per MAINTENANCE.md § Versioning). `package.json` `files` unchanged — the kit does not ship in the skill pack.
+- **MAINTENANCE.md** — eval re-run and its archive now reference the kit (`harness/scripts`).
+
 ## [1.2.3] — 2026-09-15
 
 Terminology + README audit pass: the pack's narrative is normalized from "tokenized equity" to "tokenized stocks" everywhere it ships, and the README is simplified for a first-time reader. No new rubric, route, or operating rule — an audit pass.

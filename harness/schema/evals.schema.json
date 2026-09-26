@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skills.sh/wajimaweb3/base-tokenizedstocks-skill/harness/schema/evals.schema.json",
+  "title": "eval-harness suite schema",
+  "description": "The shape of an eval suite for a domain skill: a set of cases, each run twice (with the skill and without), graded against the same structural assertions. Assertions test structure and discipline — a dated check, a named evidence tier — never frozen values, because the load-bearing facts of a domain skill are often dated negatives that a single event flips.",
+  "type": "object",
+  "required": ["skill_name", "evals"],
+  "properties": {
+    "skill_name": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Protocol for running and grading the suite. Each case runs twice — once with the skill loaded, once without — and both outputs are graded against the same assertions. Grading is judgment, not a script. Archive a full real graded run as a dated sample output."
+    },
+    "evals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "prompt", "expected_output", "assertions", "files"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$",
+            "description": "kebab-case slug that names the capability or discipline the case gates"
+          },
+          "should_trigger": {
+            "type": "boolean",
+            "description": "true when the case verifies the skill activates at all (not just that an answer is correct)"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The user question, in as raw a form as a real user would type. Tests trigger, routing, and accessibility, not idealized phrasing."
+          },
+          "expected_output": {
+            "type": "string",
+            "description": "What a correct answer looks like — structure, decomposition, honesty flags. Not a script; the human grader reads it to calibrate."
+          },
+          "assertions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "description": "Pass/fail criteria graded against BOTH runs. Structural and discipline-based: a dated check, a named evidence tier, a named procedure. Never 'the price is X' — values drift and assertions must survive flips."
+          },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "description": "Skill files (or SKILL.md) that ground this case, relative to the repo root. Assert that the grader loads them for the with-skill run."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

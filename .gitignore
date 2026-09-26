@@ -17,3 +17,6 @@ yarn-error.log*
 
 # Stale build artifacts
 dist/
+
+# Eval-harness generated scaffolds
+harness/work/

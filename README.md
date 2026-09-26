@@ -40,7 +40,7 @@ Read-only, always: the skill analyzes and flags risk; it never constructs or sig
 
 ## Evals
 
-`evals/evals.json` holds the test suite: 21 cases spanning all four task modes and every rubric. Each case runs twice — once with the skill loaded, once without — and both outputs are graded against the same structural assertions: a dated check, a named evidence tier, never frozen values, because the skill's load-bearing facts are dated negatives (no strip venue, an unexercised dividend pipe) that a single event will flip. New capabilities gate on a new case before they land.
+`evals/evals.json` holds the test suite: 24 cases spanning all five task modes and every rubric. Each case runs twice — once with the skill loaded, once without — and both outputs are graded against the same structural assertions: a dated check, a named evidence tier, never frozen values, because the skill's load-bearing facts are dated negatives (no strip venue, an unexercised dividend pipe) that a single event will flip. New capabilities gate on a new case before they land.
 
 ## Honest scope (as of 2026-09-07)
 
@@ -75,7 +75,7 @@ base-tokenizedstocks/
 ├── examples/
 │   └── assessment-example.md     # the output shape, worked on dNVDA
 └── evals/
-    └── evals.json                # 21 paired-run cases: assertions on structure, not values
+    └── evals.json                # 24 paired-run cases: assertions on structure, not values
 ```
 
 ## License
